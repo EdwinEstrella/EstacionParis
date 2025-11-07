@@ -1,0 +1,138 @@
+:root {
+  /* Variables de colores según las plantillas */
+  --primary: #CF2E2E;
+  --accent: #FF6900;
+  --text-header: #005A87;
+  --background-light: #F8F9FA;
+  --background-dark: #201212;
+
+  /* Variables de fuentes */
+  --font-display: 'Manrope', sans-serif;
+
+  /* Variables de borde */
+  --border-radius-default: 0.25rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-full: 9999px;
+
+  /* Variables de texto */
+  --text-primary: #333333;
+  --text-light: #1a0f0f;
+
+  font-family: var(--font-display);
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: var(--border-radius-lg);
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+a {
+  font-weight: 500;
+  color: var(--text-header);
+  text-decoration: inherit;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* Estilos para Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* Configuración para modo oscuro */
+.dark {
+  --background-light: var(--background-dark);
+  --text-primary: #e5e5e5;
+  --text-light: #f3f4f6;
+}
+
+.dark body {
+  background-color: var(--background-dark);
+  color: #e5e5e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-light: var(--background-dark);
+    --text-primary: #e5e5e5;
+    --text-light: #f3f4f6;
+  }
+}
+
+/* Clases de utilidad para colores personalizados */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-header {
+  color: var(--text-header);
+}
+
+.bg-background-light {
+  background-color: var(--background-light);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Transiciones */
+.transition-transform {
+  transition: transform 0.25s ease;
+}
+
+.transition-colors {
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+/* Efectos hover */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
