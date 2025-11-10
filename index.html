@@ -31,6 +31,18 @@
               "display": ["Manrope", "sans-serif"]
             },
             borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            maxWidth: {
+              container: "1280px",
+            },
+            animation: {
+              marquee: 'marquee var(--duration) linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                from: { transform: 'translateX(0)' },
+                to: { transform: 'translateX(-50%)' }
+              }
+            }
           },
         },
       }

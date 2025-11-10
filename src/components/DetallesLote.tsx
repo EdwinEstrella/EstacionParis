@@ -77,9 +77,8 @@ const DetallesLote: React.FC<DetallesLoteProps> = ({ loteId = "15A" }) => {
       <div className="relative flex min-h-screen w-full flex-col" style={{backgroundColor: '#f8f6f6'}}>
         {/* Main Content */}
         <main className="flex-grow">
-          <div className="container mx-auto px-4 py-8 md:py-12">
-            <div className="max-w-6xl mx-auto">
-              {/* Breadcrumbs */}
+          <div className="w-full px-4 py-8 md:py-12">
+            {/* Breadcrumbs */}
               <div className="flex flex-wrap gap-2 mb-6">
                 <a
                   className="text-gray-500 text-sm font-medium leading-normal hover:text-primary transition-colors cursor-pointer"
@@ -210,7 +209,6 @@ const DetallesLote: React.FC<DetallesLoteProps> = ({ loteId = "15A" }) => {
                 </div>
               </div>
             </div>
-          </div>
         </main>
       </div>
     </>

@@ -21,18 +21,18 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
 
   const getNavClass = (page: string) => {
     if (currentPage === page) {
-      return 'text-sm font-medium leading-normal text-primary dark:text-primary';
+      return 'text-sm font-medium leading-normal text-white';
     }
-    return 'text-sm font-medium leading-normal text-gray-800 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors';
+    return 'text-sm font-medium leading-normal text-white/80 hover:text-white transition-colors';
   };
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-800/50">
+      <header className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between whitespace-nowrap py-3">
-            <div className="flex items-center gap-4 text-[#1a0f0f] dark:text-gray-100">
-              <div className="h-6 w-6 text-[#CF2E2E]">
+            <div className="flex items-center gap-4 text-white">
+              <div className="h-6 w-6 text-white">
                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
                 </svg>
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
 
             <div className="md:hidden">
               <button
-                className="text-gray-700 dark:text-gray-300"
+                className="text-white"
                 onClick={toggleMenu}
               >
                 <span className="material-symbols-outlined text-3xl">menu</span>

@@ -1,117 +1,208 @@
 import React from 'react';
+import FadeIn from './Animations/FadeIn';
+import StaggeredAnimation from './Animations/StaggeredAnimation';
+import { TestimonialsSectionDemo } from './ui/TestimonialsWithMarquee';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  onNavigate?: (page: string) => void;
+}
+
+const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <>
-      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" style={{backgroundColor: '#F8F9FA'}}>
+      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
         <main className="flex h-full grow flex-col">
-          <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-5 sm:px-6 lg:px-8">
-            {/* HeroSection */}
-            <div className="@container">
-              <div className="@[480px]:p-0">
-                <div
-                  className="flex min-h-[520px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 text-center"
-                  data-alt="Expansive, beautiful green landscape at sunset with rolling hills."
-                  style={{
-                    backgroundImage: 'linear-gradient(rgba(0, 90, 135, 0.3) 0%, rgba(0, 90, 135, 0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhGlOPw2Me_rVY6GBQC0qearbdTl1USiQU-TTxiauy4hJ85jaeD7QTQoPr5cuvC1_NtFGH5AB4WmqqYHQN3FL9JRwXCXryV32wi7iA3OUhQkyICgU8jxdq_ODvPbjOduOrBdscbCFi9jhE8HIL9wxiWWDq5Pbbg4WkOb9_zk-QMDSemUKUXCQkvEBomLp0B51667fg40et9zlbBi_mHFZ60E5knoY0MGTMHKZckKZ_7zhP22GoA3ALtIYyeGn-3XDS--dzFkiVaA")'
-                  }}
-                >
-                  <div className="flex max-w-2xl flex-col gap-4">
-                    <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                      El lugar de tus sueños te espera
-                    </h1>
-                    <h2 className="text-white/90 text-base font-normal leading-normal @[480px]:text-lg @[480px]:font-normal @[480px]:leading-normal">
+          {/* HeroSection - Full screen with background image */}
+          <div className="relative min-h-screen flex items-center justify-center">
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: 'url("/hero.jpg")'
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black-60" />
+
+            <div className="relative z-10 pl-4 sm:pl-6 lg:pl-8 pr-4">
+              <FadeIn duration={800}>
+                <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start text-left max-w-full" style={{
+                  marginLeft: '0px',
+                  marginRight: '0px'
+                }}>
+                  <div className="flex flex-col gap-6 md:gap-8 items-start text-left max-w-4xl lg:max-w-5xl" style={{
+                    marginRight: '600px'
+                  }}>
+                  {/* Badge o elemento decorativo */}
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                    <span className="relative flex h-2 w-2 mr-1">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+                    </span>
+                    <span className="text-white text-sm font-medium">Lotes disponibles</span>
+                  </div>
+
+                  {/* Título principal */}
+                  <h1 className="text-white text-5xl md:text-6xl lg:text-8xl font-black leading-tight tracking-[-0.033em]">
+                    El lugar de tus
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300">
+                      sueños te espera
+                    </span>
+                  </h1>
+
+                  {/* Subtítulo enriquecido */}
+                  <div className="space-y-4 max-w-3xl">
+                    <h2 className="text-white/95 text-xl md:text-2xl font-light leading-relaxed">
                       Descubre un entorno único en Argentina para construir la vida que siempre quisiste, rodeado de naturaleza y tranquilidad.
                     </h2>
+                    <p className="text-white/80 text-base md:text-lg font-normal leading-relaxed">
+                      Ubicados en la zona más privilegiada, con acceso a todos los servicios y la paz que mereces.
+                    </p>
                   </div>
-                  <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105">
-                    <span className="truncate">Ver Lotes Disponibles</span>
-                  </button>
+
+        
+                  {/* Botón único de acción */}
+                  <div className="flex flex-col gap-4 mt-8">
+                    <button
+                      onClick={() => onNavigate?.('lotes')}
+                      className="flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-all hover:scale-105 hover:bg-red-600 shadow-xl"
+                    >
+                      <span className="truncate">Ver Lotes Disponibles</span>
+                    </button>
+
+                    {/* Texto debajo del botón */}
+                    <p className="text-white/70 text-sm font-normal leading-relaxed max-w-md">
+                      Únete a las familias que ya han encontrado su lugar ideal en Estación Paris.
+                      Tu futuro comienza aquí.
+                    </p>
+                  </div>
+                  </div>
+
+                  {/* Tarjeta de lote al lado */}
+                  <div className="flex-1 lg:max-w-md mt-8 lg:mt-0">
+                    <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-blue-900/40 to-blue-900/60 backdrop-blur-sm shadow-xl transition-all hover:shadow-2xl hover:scale-105">
+                      {/* Imagen más pequeña centrada */}
+                      <div className="relative h-32 overflow-hidden">
+                        <div
+                          className="absolute inset-4 bg-cover bg-center rounded-lg"
+                          data-alt="Photo of a grassy lot with a few trees under a clear blue sky."
+                          style={{
+                            backgroundImage: 'url("/other_house.jpg")'
+                          }}
+                        ></div>
+                        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          Disponible
+                        </div>
+                      </div>
+
+                      {/* Flecha decorativa */}
+                      <div className="absolute top-28 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full shadow-lg">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+
+                      {/* Contenido sin fondo blanco */}
+                      <div className="px-6 py-4 relative z-10">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-xl font-bold text-white mb-1">Lote Pampa 101</h3>
+                            <p className="text-white/80 text-sm">500m² - Vistas panorámicas</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between mt-4">
+                          <div>
+                            <p className="text-2xl font-bold text-white">$25,000</p>
+                            <p className="text-xs text-white/70">$50 por m²</p>
+                          </div>
+                          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-lg">
+                            Ver Detalles
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
+
+  
+            </div>
+          </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black-60">
             </div>
 
-            {/* Featured Listings Section */}
-            <section className="w-full py-10 sm:py-16">
-              <h2 className="text-text-header text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-6 pt-5 text-center">Lotes Destacados</h2>
-              <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
-                  <div
-                    className="h-48 w-full bg-cover bg-center"
-                    data-alt="Photo of a grassy lot with a few trees under a clear blue sky."
-                    style={{
-                      backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFL0C9kNxKvswzbv5rJ0xkNn7QZBQoNxhJgA_a0m5l14WAKVoqgzePUdFD0qL5YqVFN1v9MXXF6jI1TPSwlSVsCoHWEeH1RukXjzlsmYwgKybkpme-yvWDxAeKV_I2nGfrqujAADqVCuHDuXclOEmPJuevw5gN27rarsbfRZq5IK8WopS-ItVOkMEdUshmRO83EZV0Uf0HsaNpQV8z4QCazROq8NRZPRgDB7PjFrdoYLOZr6Y-JnosFevWHIIKDSU30-mGLfWr1Q")'
-                    }}
-                  ></div>
-                  <div className="flex flex-col gap-2 p-4">
-                    <p className="text-text-header text-lg font-bold leading-normal">Lote Pampa 101</p>
-                    <p className="text-text-header/70 text-sm font-normal leading-normal">500m² - Vistas panorámicas</p>
-                    <p className="text-accent text-lg font-bold leading-normal">$25,000</p>
-                  </div>
-                </div>
+          {/* Content Sections */}
+          <div className="flex w-full flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8 bg-white">
+            <div className="@container">
+              <div className="@[480px]:p-0">
+                {/* Featured Listings Section */}
+                <section className="w-full py-10 sm:py-16">
+                  <FadeIn delay={400}>
+                    <h2 className="text-text-header text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-6 pt-5 text-center">Lotes Destacados</h2>
+                  </FadeIn>
+                  <StaggeredAnimation baseDelay={600} staggerDelay={150}>
+                    <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-6xl mx-auto">
+                      <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg hover:scale-105">
+                        <div
+                          className="h-40 w-full bg-cover bg-center"
+                          data-alt="Photo of a grassy lot with a few trees under a clear blue sky."
+                          style={{
+                            backgroundImage: 'url("/other_house.jpg")'
+                          }}
+                        ></div>
+                        <div className="flex flex-col gap-2 p-4">
+                          <p className="text-text-header text-lg font-bold leading-normal">Lote Pampa 101</p>
+                          <p className="text-text-header/70 text-sm font-normal leading-normal">500m² - Vistas panorámicas</p>
+                          <p className="text-accent text-lg font-bold leading-normal">$25,000</p>
+                        </div>
+                      </div>
 
-                <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
-                  <div
-                    className="h-48 w-full bg-cover bg-center"
-                    data-alt="Photo of a lot near a small mountain range, with clear ground."
-                    style={{
-                      backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2uAs_zTeaQ_za0vxNmDVl6n2hZnayJq6biYeQ_dsTk1o6Xh_Fzz1mz28xhqa15cZDtElBXzRhWK7BBDT13UcXuhAmkBZMeCwsmejKCKYPvjg8XQXMa_wXJvLTC-WozEA3JqcaPhLfJtD04bFq-mNOmHhySTBomOFplA3G923zrawBtFQ4yjlg1zHoDPIXjXpYMYpGFQtATk6g3KK8GMxf3q-hj471asxPkIqPx8uAwyLAWH86I8H8Nm-PIolSy-myOtAae-28UA")'
-                    }}
-                  ></div>
-                  <div className="flex flex-col gap-2 p-4">
-                    <p className="text-text-header text-lg font-bold leading-normal">Lote Serrano 204</p>
-                    <p className="text-text-header/70 text-sm font-normal leading-normal">750m² - Cerca del arroyo</p>
-                    <p className="text-accent text-lg font-bold leading-normal">$38,000</p>
-                  </div>
-                </div>
+                      <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg hover:scale-105">
+                        <div
+                          className="h-40 w-full bg-cover bg-center"
+                          data-alt="Photo of a lot near a small mountain range, with clear ground."
+                          style={{
+                            backgroundImage: 'url("/other_house.jpg")'
+                          }}
+                        ></div>
+                        <div className="flex flex-col gap-2 p-4">
+                          <p className="text-text-header text-lg font-bold leading-normal">Lote Serrano 204</p>
+                          <p className="text-text-header/70 text-sm font-normal leading-normal">750m² - Cerca del arroyo</p>
+                          <p className="text-accent text-lg font-bold leading-normal">$38,000</p>
+                        </div>
+                      </div>
 
-                <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
-                  <div
-                    className="h-48 w-full bg-cover bg-center"
-                    data-alt="Photo of a lot nestled within a dense forest of tall trees."
-                    style={{
-                      backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC723utx7Ij3LR4OCYlBRt4015XE2OJZlLJyIpRfn5f551zD5qmcRvWXwuo2tZqjDStd3ZAMLzVeCi9qR8wj9zuaUsz6351F-QkSWJCi6TmCRQ2-zgzKgBWdcV8bHp1k0ilUKwMoWZei55W52QUDhd182vBlCh84y-wrzFuGDj7kIPqB4O2Ytyo9Kb5dDy6LHu2ba7ldR5imWpkKa9-LiSraaZrn4phGaYa-rU_wJ3y4wfTNmEYUv9973SOsfATjDAaiBgU3EWDoQ")'
-                    }}
-                  ></div>
-                  <div className="flex flex-col gap-2 p-4">
-                    <p className="text-text-header text-lg font-bold leading-normal">Lote del Bosque 30</p>
-                    <p className="text-text-header/70 text-sm font-normal leading-normal">600m² - Privacidad total</p>
-                    <p className="text-accent text-lg font-bold leading-normal">$32,000</p>
-                  </div>
-                </div>
+                      <div className="flex transform flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg hover:scale-105">
+                        <div
+                          className="h-40 w-full bg-cover bg-center"
+                          data-alt="Photo of a lot nestled within a dense forest of tall trees."
+                          style={{
+                            backgroundImage: 'url("/other_house.jpg")'
+                          }}
+                        ></div>
+                        <div className="flex flex-col gap-2 p-4">
+                          <p className="text-text-header text-lg font-bold leading-normal">Lote del Bosque 30</p>
+                          <p className="text-text-header/70 text-sm font-normal leading-normal">600m² - Privacidad total</p>
+                          <p className="text-accent text-lg font-bold leading-normal">$32,000</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex px-4 py-6 justify-center">
+                      <button
+                        onClick={() => onNavigate?.('lotes')}
+                        className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 border-2 border-primary text-primary bg-transparent text-base font-bold leading-normal tracking-[0.015em] transition-all hover:bg-primary hover:text-white hover:scale-105"
+                      >
+                        <span className="truncate">Ver Todos los Lotes</span>
+                      </button>
+                    </div>
+                  </StaggeredAnimation>
+                </section>
+
+                {/* Testimonials Section */}
+                <FadeIn delay={1000}>
+                  <TestimonialsSectionDemo />
+                </FadeIn>
               </div>
-
-              <div className="flex px-4 py-6 justify-center">
-                <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 border-2 border-primary text-primary bg-transparent text-base font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-primary/10">
-                  <span className="truncate">Ver Todos los Lotes</span>
-                </button>
-              </div>
-            </section>
-
-            {/* Testimonials Section */}
-            <section className="w-full bg-white rounded-xl py-10 sm:py-16">
-              <h2 className="text-text-header text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-8 pt-5 text-center">Lo que dicen nuestros clientes</h2>
-              <div className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2">
-                <div className="flex flex-col items-center gap-4 rounded-lg p-6 text-center" style={{backgroundColor: '#F8F9FA'}}>
-                  <img
-                    className="size-20 rounded-full object-cover"
-                    data-alt="Portrait of a smiling man in his 40s."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWiluv9VNyJvtAw_icrDAh7w78xijmTzz-IWJuA9KqIrY4KkF5ODQPd5E3YCbTWk7fpQ1EK7EHWMu7CC7LrwxiYH3Ie2k8ibMTF_6lP_234cEVYZOsd3AFit4evn4J8i1NXywLHo5Lm99wfUI5AK7VB8ZVmRj1nEPaydFuKRJD_iSKphPL0qJ110zmPzIep0aY-k1c1JmX5BSB9nvpbZB3fvSOu2bGMigPhr0cDNYpXy297YQ2tQKQkh8iou2Kb0frHtjXLXl65A"
-                  />
-                  <blockquote className="text-text-header/80 italic">"El proceso fue transparente y el equipo de Estacion Paris nos ayudó en cada paso. Encontramos el lugar perfecto para nuestra familia. ¡Totalmente recomendados!"</blockquote>
-                  <p className="text-text-header font-bold">- Carlos Gomez</p>
-                </div>
-                <div className="flex flex-col items-center gap-4 rounded-lg p-6 text-center" style={{backgroundColor: '#F8F9FA'}}>
-                  <img
-                    className="size-20 rounded-full object-cover"
-                    data-alt="Portrait of a smiling woman in her 30s."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4YG_lKYCvaewbFcD9LZner9TAQYIxFkSJ0RrHpCBLAyiM78hsmjbmHr0UAZ-tvI2MNzB-7IDvUwG8KjEUBU9JJpZkgkOxPaO7PlGbkhkzkyzJo88ewq0OvDk__gOF8uNmInSP0NZju3jyD8_JdPc-n9HUMLa7AXXfS_EjOHYXiBPu8-nhZ9lqNCvpnOnaXnP-tv3K-5GcVK0nDH6SYfQMUfSygDFFP6xUfHk_uWswYN1JvFWS9C9Icr8aCtRpEfGUd8H8J_uxnA"
-                  />
-                  <blockquote className="text-text-header/80 italic">"Comprar nuestro lote fue la mejor decisión. La paz y la belleza del lugar son inigualables. Estamos ansiosos por empezar a construir nuestro hogar."</blockquote>
-                  <p className="text-text-header font-bold">- Maria Fernandez</p>
-                </div>
-              </div>
-            </section>
+            </div>
           </div>
         </main>
       </div>

@@ -5,7 +5,7 @@ const Contacto: React.FC = () => {
     <>
       <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" style={{backgroundColor: '#f8f6f6'}}>
         <main className="flex flex-1 justify-center py-10 sm:py-16 px-4 sm:px-6">
-          <div className="flex flex-col w-full max-w-6xl">
+          <div className="flex flex-col w-full">
             {/* PageHeading */}
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <div className="flex min-w-72 flex-col gap-3">
@@ -90,7 +90,7 @@ const Contacto: React.FC = () => {
                   <h3 className="text-[#005A87] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Nuestra Ubicación</h3>
                   <div className="aspect-video w-full overflow-hidden rounded-xl border border-[#e5d2d2]">
                     <iframe
-                      allowFullScreen=""
+                      allowFullScreen={true}
                       data-location="Buenos Aires, Argentina"
                       height="100%"
                       loading="lazy"
