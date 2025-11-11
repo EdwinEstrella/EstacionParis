@@ -28,9 +28,15 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm">
+      <header className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm border-b-2 border-white/40">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between whitespace-nowrap py-3">
+            <div className="hidden md:flex flex-1 items-center gap-9">
+              <button className={getNavClass('home')} onClick={() => handleNavigation('home')}>Inicio</button>
+              <button className={getNavClass('nosotros')} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
+              <button className={getNavClass('lotes')} onClick={() => handleNavigation('lotes')}>Lotes</button>
+            </div>
+
             <div className="flex items-center gap-4 text-white">
               <div className="h-6 w-6 text-white">
                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -40,12 +46,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">Estacion Paris</h2>
             </div>
 
-            <div className="hidden md:flex flex-1 justify-end gap-8">
-              <div className="flex items-center gap-9">
-                <button className={getNavClass('home')} onClick={() => handleNavigation('home')}>Inicio</button>
-                <button className={getNavClass('nosotros')} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
-                <button className={getNavClass('lotes')} onClick={() => handleNavigation('lotes')}>Lotes</button>
-              </div>
+            <div className="hidden md:flex flex-1 justify-end">
               <button
                 onClick={() => handleNavigation('contacto')}
                 className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-700 transition-colors"

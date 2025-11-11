@@ -168,14 +168,15 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
 
                 {/* Contenedor 1: Título, Contador y Texto */}
-                <div className="text-center lg:text-left">
+                <div className="text-center lg:text-left" >
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
                     Nosotros
                   </h1>
 
                   {/* Contadores animados en círculos */}
-                  <div className="flex flex-col sm:flex-row -gap-8 mb-8">
-                    <div className="flex flex-col items-center">
+                  <div className="flex justify-center items-center gap-0 mb-8">
+                    {/* Primer círculo - Clientes */}
+                    <div className="relative" style={{ marginRight: '-20px', zIndex: 1 }}>
                       <div className="w-44 h-44 md:w-48 md:h-48 rounded-full border-2 border-white flex items-center justify-center">
                         <div className="text-center">
                           <span className="text-xl md:text-2xl font-normal text-white">+</span>
@@ -185,7 +186,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                       </div>
                     </div>
 
-                    <div className="flex flex-col items-center">
+                    {/* Segundo círculo - Lotes */}
+                    <div className="relative">
                       <div className="w-44 h-44 md:w-48 md:h-48 rounded-full border-2 border-white flex items-center justify-center">
                         <div className="text-center">
                           <span className="text-xl md:text-2xl font-normal text-white">+</span>
