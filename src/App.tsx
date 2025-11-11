@@ -80,21 +80,34 @@ function App() {
   };
 
   const renderPage = () => {
-    switch (currentPage) {
-      case 'nosotros':
-        return <Nosotros />;
-      case 'lotes':
-        return <Lotes onNavigate={handleNavigation} />;
-      case 'detalles':
-        return <DetallesLote loteId={navigationParams.loteId} />;
-      case 'contacto':
-        return <Contacto />;
-      case 'politica':
-        return <PoliticaPrivacidad />;
-      case 'home':
-      default:
-        return <Home onNavigate={handleNavigation} />;
+    const pageContent = () => {
+      switch (currentPage) {
+        case 'nosotros':
+          return <Nosotros />;
+        case 'lotes':
+          return <Lotes onNavigate={handleNavigation} />;
+        case 'detalles':
+          return <DetallesLote loteId={navigationParams.loteId} />;
+        case 'contacto':
+          return <Contacto />;
+        case 'politica':
+          return <PoliticaPrivacidad />;
+        case 'home':
+        default:
+          return <Home onNavigate={handleNavigation} />;
+      }
+    };
+
+    // Agregar padding top para páginas que no son home
+    if (currentPage === 'home') {
+      return pageContent();
     }
+
+    return (
+      <div className="pt-20">
+        {pageContent()}
+      </div>
+    );
   };
 
   return (
@@ -104,8 +117,8 @@ function App() {
       <Footer7 onNavigate={handleNavigation} />
       <ChatBot />
 
-      {/* Cookie Consent System */}
-      {!cookieConsent && (
+      {/* Cookie Consent System - COMENTADO TEMPORALMENTE */}
+      {/* {!cookieConsent && (
         <CookieConsent
           onAccept={handleCookieAccept}
           onReject={handleCookieReject}
@@ -117,7 +130,7 @@ function App() {
         isOpen={showCookieSettings}
         onClose={() => setShowCookieSettings(false)}
         onSave={handleCookieSave}
-      />
+      /> */}
     </div>
   );
 }

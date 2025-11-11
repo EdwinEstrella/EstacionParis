@@ -1,38 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FadeIn from './Animations/FadeIn';
 import StaggeredAnimation from './Animations/StaggeredAnimation';
 import { TestimonialsSectionDemo } from './ui/TestimonialsWithMarquee';
+import { InstagramIcon, LinkedinIcon, ArrowRightIcon } from './icons';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const [contador1, setContador1] = useState(0);
+  const [contador2, setContador2] = useState(0);
+  const [contador3, setContador3] = useState(0);
+
+  useEffect(() => {
+    const duration = 2000;
+    const steps = 60;
+    const interval = duration / steps;
+
+    const incrementCounter = (target: number, setter: React.Dispatch<React.SetStateAction<number>>) => {
+      let current = 0;
+      const step = target / steps;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          setter(target);
+          clearInterval(timer);
+        } else {
+          setter(Math.floor(current));
+        }
+      }, interval);
+    };
+
+    incrementCounter(500, setContador1);
+    incrementCounter(15, setContador2);
+    incrementCounter(8, setContador3);
+
+    return () => {
+      setContador1(0);
+      setContador2(0);
+      setContador3(0);
+    };
+  }, []);
   return (
     <>
       <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
         <main className="flex h-full grow flex-col">
-          {/* HeroSection - Full screen with background image */}
-          <div className="relative min-h-screen flex items-center justify-center">
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: 'url("/hero.jpg")'
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black-60" />
+          {/* HeroSection - Full screen con nuevo diseño */}
+          <section className="relative h-[90vh] min-h-[700px] text-white flex flex-col justify-center">
+            <div className="absolute inset-0 bg-black">
+              <div
+                className="w-full h-full object-cover opacity-40"
+                style={{
+                  backgroundImage: 'url("/hero.jpg")',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+            </div>
 
-            <div className="relative z-10 pl-4 sm:pl-6 lg:pl-8 pr-4">
-              <FadeIn duration={800}>
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start text-left max-w-full" style={{
-                  marginLeft: '0px',
-                  marginRight: '0px'
-                }}>
-                  <div className="flex flex-col gap-6 md:gap-8 items-start text-left max-w-4xl lg:max-w-5xl" style={{
-                    marginRight: '600px'
-                  }}>
+            <div className="relative z-10 container mx-auto px-4 lg:px-8 flex flex-col h-full">
+              <div className="flex-grow flex flex-col justify-center">
+                <div className="max-w-2xl">
                   {/* Badge o elemento decorativo */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
                     <span className="relative flex h-2 w-2 mr-1">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
@@ -40,94 +71,171 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     <span className="text-white text-sm font-medium">Lotes disponibles</span>
                   </div>
 
-                  {/* Título principal */}
-                  <h1 className="text-white text-5xl md:text-6xl lg:text-8xl font-black leading-tight tracking-[-0.033em]">
+                  <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl !leading-tight">
                     El lugar de tus
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300">
                       sueños te espera
                     </span>
                   </h1>
+                  <p className="mt-6 text-lg max-w-md">
+                    Descubre el lugar ideal para construir tu hogar en Argentina.
+                  </p>
+                  <button
+                    onClick={() => onNavigate?.('lotes')}
+                    className="mt-8 bg-[#E9C874] text-black px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-colors"
+                  >
+                    Ver Lotes Disponibles
+                  </button>
+                </div>
+              </div>
 
-                  {/* Subtítulo enriquecido */}
-                  <div className="space-y-4 max-w-3xl">
-                    <h2 className="text-white/95 text-xl md:text-2xl font-light leading-relaxed">
-                      Descubre un entorno único en Argentina para construir la vida que siempre quisiste, rodeado de naturaleza y tranquilidad.
-                    </h2>
-                    <p className="text-white/80 text-base md:text-lg font-normal leading-relaxed">
-                      Ubicados en la zona más privilegiada, con acceso a todos los servicios y la paz que mereces.
-                    </p>
+              {/* Tarjeta de lote lateral */}
+              <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 right-8 bg-white bg-opacity-10 backdrop-blur-md p-4 rounded-2xl w-80 shadow-lg border border-white/20">
+                <div className="relative h-32 overflow-hidden rounded-lg mb-3">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center rounded-lg"
+                    style={{
+                      backgroundImage: 'url("/other_house.jpg")'
+                    }}
+                  ></div>
+                  <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    Disponible
                   </div>
-
-        
-                  {/* Botón único de acción */}
-                  <div className="flex flex-col gap-4 mt-8">
-                    <button
-                      onClick={() => onNavigate?.('lotes')}
-                      className="flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-[0.015em] transition-all hover:scale-105 hover:bg-red-600 shadow-xl"
-                    >
-                      <span className="truncate">Ver Lotes Disponibles</span>
-                    </button>
-
-                    {/* Texto debajo del botón */}
-                    <p className="text-white/70 text-sm font-normal leading-relaxed max-w-md">
-                      Únete a las familias que ya han encontrado su lugar ideal en Estación Paris.
-                      Tu futuro comienza aquí.
-                    </p>
+                </div>
+                <p className="text-sm font-semibold">Lote Pampa 101 - 500m² con vistas panorámicas</p>
+                <div className="flex justify-between items-center mt-2">
+                  <div>
+                    <p className="text-lg font-bold">$25,000</p>
+                    <p className="text-xs text-gray-300">$50 por m²</p>
                   </div>
-                  </div>
+                  <button className="bg-white hover:bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center">
+                    <ArrowRightIcon className="w-5 h-5 text-black" />
+                  </button>
+                </div>
+              </div>
 
-                  {/* Tarjeta de lote al lado */}
-                  <div className="flex-1 lg:max-w-md mt-8 lg:mt-0">
-                    <div className="relative overflow-hidden rounded-xl bg-gradient-to-b from-blue-900/40 to-blue-900/60 backdrop-blur-sm shadow-xl transition-all hover:shadow-2xl hover:scale-105">
-                      {/* Imagen más pequeña centrada */}
-                      <div className="relative h-32 overflow-hidden">
-                        <div
-                          className="absolute inset-4 bg-cover bg-center rounded-lg"
-                          data-alt="Photo of a grassy lot with a few trees under a clear blue sky."
-                          style={{
-                            backgroundImage: 'url("/other_house.jpg")'
-                          }}
-                        ></div>
-                        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          Disponible
-                        </div>
-                      </div>
-
-                      {/* Flecha decorativa */}
-                      <div className="absolute top-28 right-4 bg-white/20 backdrop-blur-sm p-2 rounded-full shadow-lg">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              {/* Buscador inferior */}
+              <div className="relative mt-auto mb-8 lg:mb-16 w-full">
+                <div className="bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-2xl shadow-2xl">
+                  <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-4 text-white">
+                    <div className="col-span-2 md:col-span-1 border-r border-white/30 pr-4">
+                      <label className="text-xs font-bold block">Ubicación</label>
+                      <input type="text" placeholder="Buscar ubicaciones" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                    </div>
+                    <div className="border-r border-white/30 pr-4">
+                      <label className="text-xs font-bold block">Tamaño</label>
+                      <input type="text" placeholder="m²" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                    </div>
+                    <div className="border-r border-white/30 pr-4">
+                      <label className="text-xs font-bold block">Presupuesto</label>
+                      <input type="text" placeholder="Max $" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                    </div>
+                    <div className="pr-4">
+                      <label className="text-xs font-bold block">Tipo</label>
+                      <input type="text" placeholder="Residencial" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                    </div>
+                    <div className="col-span-2 md:col-span-1 flex justify-center">
+                       <button className="bg-[#E9C874] text-black rounded-full h-14 w-14 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                      </div>
+                       </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                      {/* Contenido sin fondo blanco */}
-                      <div className="px-6 py-4 relative z-10">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-xl font-bold text-white mb-1">Lote Pampa 101</h3>
-                            <p className="text-white/80 text-sm">500m² - Vistas panorámicas</p>
-                          </div>
+            {/* Redes sociales */}
+            <div className="absolute bottom-8 right-8 z-20 flex space-x-4">
+              <a href="https://instagram.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                <InstagramIcon className="w-5 h-5"/>
+              </a>
+              <a href="https://facebook.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+                <a href="https://linkedin.com/company/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                <LinkedinIcon className="w-5 h-5"/>
+              </a>
+            </div>
+          </section>
+
+          {/* Nueva sección Nosotros con 3 contenedores horizontales */}
+          <section className="py-20 px-4" style={{ backgroundColor: '#3D5743' }}>
+            <div className="container mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+
+                {/* Contenedor 1: Título, Contador y Texto */}
+                <div className="text-center lg:text-left">
+                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
+                    Nosotros
+                  </h1>
+
+                  {/* Contadores animados en círculos */}
+                  <div className="flex flex-col sm:flex-row -gap-8 mb-8">
+                    <div className="flex flex-col items-center">
+                      <div className="w-44 h-44 md:w-48 md:h-48 rounded-full border-2 border-white flex items-center justify-center">
+                        <div className="text-center">
+                          <span className="text-xl md:text-2xl font-normal text-white">+</span>
+                          <span className="text-3xl md:text-4xl font-normal text-white">{contador1}</span>
+                          <p className="text-white text-sm font-normal mt-1">Clientes</p>
                         </div>
-                        <div className="flex items-center justify-between mt-4">
-                          <div>
-                            <p className="text-2xl font-bold text-white">$25,000</p>
-                            <p className="text-xs text-white/70">$50 por m²</p>
-                          </div>
-                          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-lg">
-                            Ver Detalles
-                          </button>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                      <div className="w-44 h-44 md:w-48 md:h-48 rounded-full border-2 border-white flex items-center justify-center">
+                        <div className="text-center">
+                          <span className="text-xl md:text-2xl font-normal text-white">+</span>
+                          <span className="text-3xl md:text-4xl font-normal text-white">{contador3}</span>
+                          <p className="text-white text-sm font-normal mt-1">Lotes</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </FadeIn>
 
-  
+                  <p className="text-white text-lg leading-relaxed">
+                    En Estación Paris, somos más que una empresa inmobiliaria. Somos constructores de sueños,
+                    dedicados a ayudar a las familias argentinas a encontrar el lugar perfecto donde construir
+                    su futuro. Con años de experiencia y cientos de familias satisfechas, nos enorgullece ser
+                    parte del comienzo de nuevas historias de vida.
+                  </p>
+                </div>
+
+                {/* Contenedor 2: Mapa de Argentina SVG */}
+                <div className="flex justify-center items-center">
+                  <div className="w-full max-w-md">
+                    <img
+                      src="/argentinaHigh.svg"
+                      alt="Mapa de Argentina"
+                      className="w-full h-auto object-contain"
+                      style={{ maxHeight: '400px' }}
+                    />
+                  </div>
+                </div>
+
+                {/* Contenedor 3: Dos imágenes verticales */}
+                <div className="flex flex-col gap-6 justify-center">
+                  <div className="w-full max-w-sm mx-auto">
+                    <img
+                      src="/Nosotros_1.jpg"
+                      alt="Nosotros 1"
+                      className="w-full h-48 object-cover rounded-lg shadow-lg"
+                    />
+                  </div>
+                  <div className="w-full max-w-sm mx-auto">
+                    <img
+                      src="/Nosotros_2.jpg"
+                      alt="Nosotros 2"
+                      className="w-full h-48 object-cover rounded-lg shadow-lg"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black-60">
-            </div>
+          </section>
 
           {/* Content Sections */}
           <div className="flex w-full flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8 bg-white">
