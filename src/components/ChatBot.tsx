@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
   const [inputValue, setInputValue] = useState('');
@@ -18,11 +19,28 @@ const ChatBot: React.FC = () => {
     }
   }, [isOpen, messages.length]);
 
+  useEffect(() => {
+    if (isOpen) {
+      // Pequeño delay para que el DOM se actualice antes de iniciar la animación
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+      });
+    }
+  }, [isOpen]);
+
   const handleToggle = () => {
-    setIsOpen(!isOpen);
     if (!isOpen) {
+      setIsOpen(true);
+      setIsAnimating(false);
       // Resetear mensajes al abrir
       setMessages([]);
+    } else {
+      setIsAnimating(false);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 300);
     }
   };
 
@@ -76,7 +94,9 @@ const ChatBot: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-200">
+        <div className={`fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-200 transition-all duration-500 ease-out ${
+          isAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
+        }`}>
           {/* Header del chat */}
           <div className="flex items-center justify-between p-4 bg-primary text-white" style={{ backgroundColor: '#CF2E2E' }}>
             <div className="flex items-center gap-3">

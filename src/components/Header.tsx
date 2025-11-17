@@ -8,10 +8,33 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpenSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuAnimating, setIsMenuAnimating] = useState(false);
+  // Inicializar isMounted en false solo para home, true para otras páginas
+  const [isMounted, setIsMounted] = useState(() => {
+    return currentPage !== 'home';
+  });
   // Inicializar isScrolled basándose en la página actual
   const [isScrolled, setIsScrolled] = useState(() => {
     return currentPage === 'nosotros' || currentPage === 'lotes' || currentPage === 'contacto' || currentPage === 'detalles';
   });
+
+  useEffect(() => {
+    // Animación de entrada: bajar desde arriba solo en home
+    if (currentPage === 'home') {
+      // Resetear el estado para que comience desde arriba
+      setIsMounted(false);
+      // Usar requestAnimationFrame para asegurar que el DOM se actualice con el estado inicial
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          // Ahora sí iniciar la animación
+          setIsMounted(true);
+        });
+      });
+    } else {
+      // En otras páginas, mostrar inmediatamente sin animación
+      setIsMounted(true);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     // En páginas con fondo claro, el header debe ser blanco desde el inicio
@@ -46,7 +69,21 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpe
   }, [currentPage]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      setIsMenuOpen(true);
+      setIsMenuAnimating(false);
+      // Pequeño delay para que el DOM se actualice antes de iniciar la animación
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsMenuAnimating(true);
+        });
+      });
+    } else {
+      setIsMenuAnimating(false);
+      setTimeout(() => {
+        setIsMenuOpen(false);
+      }, 500);
+    }
   };
 
   const handleNavigation = (page: string) => {
@@ -72,8 +109,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpe
   };
 
   const headerClass = isScrolled
-    ? 'fixed top-0 z-50 w-full bg-white backdrop-blur-sm border-b-2 border-black/20 shadow-sm'
-    : 'fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm border-b-2 border-white/40';
+    ? `fixed top-0 z-50 w-full bg-white backdrop-blur-sm border-b-2 border-black/20 shadow-sm ${currentPage === 'home' ? `transition-transform duration-[2000ms] ease-in-out ${isMounted ? 'translate-y-0' : '-translate-y-full'}` : ''}`
+    : `fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm border-b-2 border-white/40 ${currentPage === 'home' ? `transition-transform duration-[2000ms] ease-in-out ${isMounted ? 'translate-y-0' : '-translate-y-full'}` : ''}`;
 
   const logoClass = isScrolled ? 'text-black' : 'text-white';
   const titleClass = isScrolled ? 'text-black' : 'text-white';
@@ -124,23 +161,46 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpe
       {isMenuOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 z-40 md:hidden animate-in fade-in duration-300"
             onClick={toggleMenu}
           ></div>
-          <div className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl z-50 md:hidden transform transition-transform duration-300 ease-in-out">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-bold text-[#1a0f0f] dark:text-white">Menú</h3>
+          <div className={`fixed right-0 top-0 h-full w-80 bg-gray-900 shadow-xl z-50 md:hidden transform transition-all duration-500 ease-out ${
+            isMenuAnimating ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          }`}>
+            <div className="flex items-center justify-between p-4 border-b border-gray-700">
+              <h3 className="text-lg font-bold text-white">Menú</h3>
               <button
-                className="text-gray-700 dark:text-gray-300"
+                className="text-white hover:text-gray-300 transition-colors"
                 onClick={toggleMenu}
               >
                 <span className="material-symbols-outlined text-3xl">close</span>
               </button>
             </div>
             <nav className="flex flex-col p-4 space-y-4">
-              <button className={`${getNavClass('home')} text-left`} onClick={() => handleNavigation('home')}>Inicio</button>
-              <button className={`${getNavClass('nosotros')} text-left`} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
-              <button className={`${getNavClass('lotes')} text-left`} onClick={() => handleNavigation('lotes')}>Lotes</button>
+              <button 
+                className={`text-sm font-medium leading-normal transition-colors text-left ${
+                  currentPage === 'home' ? 'text-white font-bold' : 'text-gray-300 hover:text-white'
+                }`} 
+                onClick={() => handleNavigation('home')}
+              >
+                Inicio
+              </button>
+              <button 
+                className={`text-sm font-medium leading-normal transition-colors text-left ${
+                  currentPage === 'nosotros' ? 'text-white font-bold' : 'text-gray-300 hover:text-white'
+                }`} 
+                onClick={() => handleNavigation('nosotros')}
+              >
+                Nosotros
+              </button>
+              <button 
+                className={`text-sm font-medium leading-normal transition-colors text-left ${
+                  currentPage === 'lotes' ? 'text-white font-bold' : 'text-gray-300 hover:text-white'
+                }`} 
+                onClick={() => handleNavigation('lotes')}
+              >
+                Lotes
+              </button>
               {onOpenSearch && (
                 <button
                   onClick={() => {

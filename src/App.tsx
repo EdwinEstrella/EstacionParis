@@ -127,7 +127,7 @@ function App() {
       <Header 
         currentPage={currentPage} 
         onNavigate={handleNavigation}
-        onOpenSearch={currentPage === 'home' ? () => setIsSearchOpen(true) : undefined}
+        onOpenSearch={currentPage === 'home' || currentPage === 'nosotros' ? () => setIsSearchOpen(true) : undefined}
       />
       {renderPage()}
       <Footer7 onNavigate={handleNavigation} />
