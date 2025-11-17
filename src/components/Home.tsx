@@ -6,9 +6,11 @@ import { InstagramIcon, LinkedinIcon } from './icons';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
+  isSearchOpen?: boolean;
+  setIsSearchOpen?: (open: boolean) => void;
 }
 
-const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC<HomeProps> = ({ onNavigate, isSearchOpen = false, setIsSearchOpen }) => {
   const [contador1, setContador1] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [contador2, setContador2] = useState(0);
@@ -75,8 +77,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </div>
 
             <div className="relative z-10 w-full h-full">
-              <div className="container mx-auto px-4 lg:px-8 flex flex-col h-full">
-                <div className="flex-grow flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
+              <div className="container mx-auto px-4 lg:px-8 flex flex-col h-full pt-24 lg:pt-0">
+                <div className="flex-grow flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12 justify-center lg:justify-start">
                   {/* Contenido principal - Izquierda */}
                   <div className="flex flex-col justify-center lg:w-1/2">
                     <FadeIn direction="up" delay={100}>
@@ -132,12 +134,12 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                {/* Buscador inferior */}
+                {/* Buscador inferior - Desktop */}
                 <FadeIn direction="up" delay={400}>
-                  <div className="relative mt-auto mb-8 lg:mb-16 w-full flex justify-center z-20">
-                    <div className="bg-white bg-opacity-20 backdrop-blur-md p-3 rounded-2xl shadow-2xl max-w-4xl w-full hover:bg-opacity-25 transition-all duration-300">
-                      <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-3 text-white">
-                      <div className="col-span-2 md:col-span-1 border-r border-white/30 pr-4">
+                  <div className="hidden md:block relative mt-auto mb-8 lg:mb-16 w-full z-20">
+                    <div className="bg-white bg-opacity-20 backdrop-blur-md p-3 rounded-2xl shadow-2xl max-w-4xl mx-auto hover:bg-opacity-25 transition-all duration-300">
+                      <div className="grid grid-cols-5 items-center gap-3 text-white">
+                      <div className="border-r border-white/30 pr-4">
                         <label className="text-xs font-bold block">Ubicación</label>
                         <input type="text" placeholder="Buscar ubicaciones" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
                       </div>
@@ -153,7 +155,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         <label className="text-xs font-bold block">Tipo</label>
                         <input type="text" placeholder="Residencial" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
                       </div>
-                      <div className="col-span-2 md:col-span-1 flex justify-center">
+                      <div className="flex justify-center">
                          <button className="bg-[#E9C874] text-black rounded-full h-14 w-14 flex items-center justify-center">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -164,20 +166,21 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     </div>
                   </div>
                 </FadeIn>
+
               </div>
             </div>
 
-            {/* Redes sociales */}
-            <div className="absolute bottom-8 right-8 z-20 flex space-x-4">
-              <a href="https://instagram.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+            {/* Redes sociales - Solo visible en PC */}
+            <div className="hidden lg:flex absolute bottom-8 right-8 z-30 space-x-4">
+              <a href="https://instagram.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
                 <InstagramIcon className="w-5 h-5"/>
               </a>
-              <a href="https://facebook.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+              <a href="https://facebook.com/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
-                <a href="https://linkedin.com/company/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                <a href="https://linkedin.com/company/estacionparis" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
                 <LinkedinIcon className="w-5 h-5"/>
               </a>
             </div>
@@ -339,6 +342,75 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
         </main>
       </div>
+
+      {/* Popup Buscador - Mobile */}
+      {isSearchOpen && setIsSearchOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsSearchOpen(false)}
+        >
+          {/* Fondo oscuro */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          
+          {/* Contenedor del buscador */}
+          <div 
+            className="relative z-10 bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-2xl shadow-2xl w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botón cerrar */}
+            <button
+              onClick={() => setIsSearchOpen && setIsSearchOpen(false)}
+              className="absolute top-3 right-3 text-white hover:text-gray-300 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Buscador */}
+            <div className="grid grid-cols-1 gap-4 text-white">
+              <div>
+                <label className="text-sm font-bold block mb-2">Ubicación</label>
+                <input 
+                  type="text" 
+                  placeholder="Buscar ubicaciones" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Tamaño</label>
+                <input 
+                  type="text" 
+                  placeholder="m²" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Presupuesto</label>
+                <input 
+                  type="text" 
+                  placeholder="Max $" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Tipo</label>
+                <input 
+                  type="text" 
+                  placeholder="Residencial" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <button className="bg-[#E9C874] text-black rounded-lg py-3 px-6 font-bold hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

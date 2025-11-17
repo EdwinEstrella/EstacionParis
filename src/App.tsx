@@ -30,6 +30,7 @@ function App() {
   const [showCookieSettings, setShowCookieSettings] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookieConsent, setCookieConsent] = useState<string | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Cache hooks
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -105,7 +106,7 @@ function App() {
           return <PoliticaPrivacidad />;
         case 'home':
         default:
-          return <Home onNavigate={handleNavigation} />;
+          return <Home onNavigate={handleNavigation} isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />;
       }
     };
 
@@ -123,7 +124,11 @@ function App() {
 
   return (
     <div className="App w-full min-h-screen">
-      <Header currentPage={currentPage} onNavigate={handleNavigation} />
+      <Header 
+        currentPage={currentPage} 
+        onNavigate={handleNavigation}
+        onOpenSearch={currentPage === 'home' ? () => setIsSearchOpen(true) : undefined}
+      />
       {renderPage()}
       <Footer7 onNavigate={handleNavigation} />
       <ChatBot />

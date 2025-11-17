@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 interface HeaderProps {
   currentPage?: string;
   onNavigate?: (page: string) => void;
+  onOpenSearch?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpenSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Inicializar isScrolled basándose en la página actual
   const [isScrolled, setIsScrolled] = useState(() => {
@@ -140,6 +141,20 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
               <button className={`${getNavClass('home')} text-left`} onClick={() => handleNavigation('home')}>Inicio</button>
               <button className={`${getNavClass('nosotros')} text-left`} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
               <button className={`${getNavClass('lotes')} text-left`} onClick={() => handleNavigation('lotes')}>Lotes</button>
+              {onOpenSearch && (
+                <button
+                  onClick={() => {
+                    onOpenSearch();
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-[#E9C874] text-black text-sm font-bold leading-normal hover:bg-opacity-90 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  Buscar
+                </button>
+              )}
               <button
                 onClick={() => handleNavigation('contacto')}
                 className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-700 transition-colors"
