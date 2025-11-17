@@ -12,8 +12,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onNavigate, isSearchOpen = false, setIsSearchOpen }) => {
   const [contador1, setContador1] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [contador2, setContador2] = useState(0);
+  const [_contador2, setContador2] = useState(0);
   const [contador3, setContador3] = useState(0);
 
   useEffect(() => {
