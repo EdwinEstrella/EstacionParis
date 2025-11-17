@@ -1,9 +1,5 @@
-import React from "react"
 import { Avatar, AvatarImage } from "./Avatar"
-
-export function cn(...inputs: (string | undefined)[]) {
-  return inputs.filter(Boolean).join(' ')
-}
+import { cn } from "../../utils/cn"
 
 export interface TestimonialAuthor {
   name: string

@@ -5,7 +5,7 @@ interface CacheEntry<T> {
 }
 
 class CacheManager {
-  private cache: Map<string, CacheEntry<any>> = new Map();
+  private cache: Map<string, CacheEntry<unknown>> = new Map();
   private readonly DEFAULT_TTL = 30 * 60 * 1000; // 30 minutes
 
   /**
@@ -51,7 +51,7 @@ class CacheManager {
 
     // Check if cache entry exists and is not expired
     if (entry && Date.now() - entry.timestamp < entry.ttl) {
-      return entry.data;
+      return entry.data as T;
     }
 
     // Cache miss or expired, remove it
@@ -149,7 +149,7 @@ class CacheManager {
     }
   }
 
-  private getFromLocalStorage(key: string): CacheEntry<any> | null {
+  private getFromLocalStorage(key: string): CacheEntry<unknown> | null {
     try {
       const stored = localStorage.getItem(`cache_${key}`);
       return stored ? JSON.parse(stored) : null;

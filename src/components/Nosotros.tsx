@@ -3,7 +3,7 @@ import React from 'react';
 const Nosotros: React.FC = () => {
   return (
     <>
-      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" style={{backgroundColor: '#F8F9FA'}}>
+      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden bg-white">
         <main className="flex-grow">
           <div className="@container py-10">
             <div className="@[480px]:p-4">
@@ -135,10 +135,10 @@ const Nosotros: React.FC = () => {
               <h2 className="text-white text-3xl font-bold">Encuentra tu Lugar Perfecto</h2>
               <p className="text-white/80 max-w-2xl">¿Listo para comenzar tu viaje? Explora nuestros lotes disponibles o contacta a nuestro equipo para una consulta personalizada. Tu futuro hogar comienza aquí.</p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-[#FF6900] text-white text-base font-bold leading-normal tracking-[0.015em]">
+                <button className="flex min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-[#E9C874] text-black text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors">
                   <span className="truncate">Ver Nuestros Lotes</span>
                 </button>
-                <button className="flex min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-white text-[#005A87] text-base font-bold leading-normal tracking-[0.015em]">
+                <button className="flex min-w-[140px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 border-2 border-white text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-white hover:text-[#005A87] transition-colors">
                   <span className="truncate">Contáctanos</span>
                 </button>
               </div>

@@ -1,6 +1,8 @@
 import React from "react"
-import { TestimonialCard, cn } from "./TestimonialCard"
+import { TestimonialCard } from "./TestimonialCard"
+import { cn } from "../../utils/cn"
 import type { TestimonialAuthor } from "./TestimonialCard"
+import { testimonials } from "../../data/testimonials"
 
 interface TestimonialsSectionProps {
   title: string
@@ -68,64 +70,6 @@ export function TestimonialsSection({
     </section>
   )
 }
-
-// Demo data
-export const testimonials = [
-  {
-    author: {
-      name: "Carlos Gómez",
-      handle: "cliente.estacionparis",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "El proceso fue transparente y el equipo de Estacion Paris nos ayudó en cada paso. Encontramos el lugar perfecto para nuestra familia. ¡Totalmente recomendados!",
-    href: "https://twitter.com"
-  },
-  {
-    author: {
-      name: "María Fernández",
-      handle: "propietaria.lote",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "Comprar nuestro lote fue la mejor decisión. La paz y la belleza del lugar son inigualables. Estamos ansiosos por empezar a construir nuestro hogar.",
-    href: "https://twitter.com"
-  },
-  {
-    author: {
-      name: "Roberto Silva",
-      handle: "inversor.inmobiliario",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "La calidad del servicio y la ubicación de los lotes es excelente. La documentación clara y el apoyo constante hicieron toda la diferencia.",
-    href: "https://twitter.com"
-  },
-  {
-    author: {
-      name: "Ana Martinez",
-      handle: "cliente.satisfecha",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "Increíble experiencia con el equipo. Desde la primera visita hasta la firma, todo fue profesional y eficiente. Muy recomendados.",
-    href: "https://twitter.com"
-  },
-  {
-    author: {
-      name: "Luis Rodriguez",
-      handle: "desarrollador.prop",
-      avatar: "https://images.unsplash.com/photo-1500648397778-c596db574c6a?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "Los terrenos tienen excelente ubicación y el equipo te asesora en todo el proceso. La inversión vale totalmente la pena.",
-    href: "https://twitter.com"
-  },
-  {
-    author: {
-      name: "Sofia Torres",
-      handle: "propietaria.feliz",
-      avatar: "https://images.unsplash.com/photo-1489424761084-5d65b916e0e3?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "El sueño de tener nuestro propio terreno se hizo realidad gracias a Estacion Paris. Atención excepcional y terrenos de primera calidad.",
-    href: "https://twitter.com"
-  }
-]
 
 export function TestimonialsSectionDemo() {
   return (

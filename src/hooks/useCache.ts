@@ -5,7 +5,7 @@ interface UseCacheOptions<T> {
   key: string;
   fetcher: () => Promise<T>;
   ttl?: number;
-  dependencies?: any[];
+  dependencies?: unknown[];
   enabled?: boolean;
 }
 
@@ -72,6 +72,7 @@ export function useCache<T>({
     if (enabled) {
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, enabled, ...dependencies]);
 
   return {

@@ -65,6 +65,7 @@ const PerformanceMonitor: React.FC = () => {
   const calculateMemoryUsage = (): number => {
     try {
       if ('memory' in performance) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const memory = (performance as any).memory;
         return memory ? memory.usedJSHeapSize / 1024 / 1024 : 0; // MB
       }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface HeaderProps {
   currentPage?: string;
@@ -7,6 +7,39 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    // En páginas con fondo claro, el header debe ser blanco desde el inicio
+    if (currentPage === 'nosotros' || currentPage === 'lotes' || currentPage === 'contacto') {
+      setIsScrolled(true);
+      return;
+    }
+
+    // Solo aplicar scroll en la página home
+    if (currentPage !== 'home') {
+      setIsScrolled(false);
+      return;
+    }
+
+    const handleScroll = () => {
+      // Cambiar a blanco cuando se hace scroll (más de 50px)
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Verificar posición inicial
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentPage]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,15 +53,31 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
   };
 
   const getNavClass = (page: string) => {
-    if (currentPage === page) {
-      return 'text-sm font-medium leading-normal text-white';
+    const baseClass = 'text-sm font-medium leading-normal transition-colors';
+    if (isScrolled) {
+      if (currentPage === page) {
+        return `${baseClass} text-black`;
+      }
+      return `${baseClass} text-black/80 hover:text-black`;
+    } else {
+      if (currentPage === page) {
+        return `${baseClass} text-white`;
+      }
+      return `${baseClass} text-white/80 hover:text-white`;
     }
-    return 'text-sm font-medium leading-normal text-white/80 hover:text-white transition-colors';
   };
+
+  const headerClass = isScrolled
+    ? 'fixed top-0 z-50 w-full bg-white backdrop-blur-sm border-b-2 border-black/20 shadow-sm'
+    : 'fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm border-b-2 border-white/40';
+
+  const logoClass = isScrolled ? 'text-black' : 'text-white';
+  const titleClass = isScrolled ? 'text-black' : 'text-white';
+  const menuButtonClass = isScrolled ? 'text-black' : 'text-white';
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm border-b-2 border-white/40">
+      <header className={headerClass}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between whitespace-nowrap py-3">
             <div className="hidden md:flex flex-1 items-center gap-9">
@@ -37,13 +86,13 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
               <button className={getNavClass('lotes')} onClick={() => handleNavigation('lotes')}>Lotes</button>
             </div>
 
-            <div className="flex items-center gap-4 text-white">
-              <div className="h-6 w-6 text-white">
+            <div className={`flex items-center gap-4 ${titleClass}`}>
+              <div className={`h-6 w-6 ${logoClass}`}>
                 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
                 </svg>
               </div>
-              <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">Estacion Paris</h2>
+              <h2 className={`text-lg font-bold leading-tight tracking-[-0.015em] ${titleClass}`}>Estacion Paris</h2>
             </div>
 
             <div className="hidden md:flex flex-1 justify-end">
@@ -57,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
 
             <div className="md:hidden">
               <button
-                className="text-white"
+                className={menuButtonClass}
                 onClick={toggleMenu}
               >
                 <span className="material-symbols-outlined text-3xl">menu</span>
@@ -85,9 +134,9 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => 
               </button>
             </div>
             <nav className="flex flex-col p-4 space-y-4">
-              <button className={getNavClass('home')} onClick={() => handleNavigation('home')}>Inicio</button>
-              <button className={getNavClass('nosotros')} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
-              <button className={getNavClass('lotes')} onClick={() => handleNavigation('lotes')}>Lotes</button>
+              <button className={`${getNavClass('home')} text-left`} onClick={() => handleNavigation('home')}>Inicio</button>
+              <button className={`${getNavClass('nosotros')} text-left`} onClick={() => handleNavigation('nosotros')}>Nosotros</button>
+              <button className={`${getNavClass('lotes')} text-left`} onClick={() => handleNavigation('lotes')}>Lotes</button>
               <button
                 onClick={() => handleNavigation('contacto')}
                 className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-700 transition-colors"

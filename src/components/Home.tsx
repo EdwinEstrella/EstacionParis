@@ -10,6 +10,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [contador1, setContador1] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [contador2, setContador2] = useState(0);
   const [contador3, setContador3] = useState(0);
 
@@ -62,15 +63,6 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <div className="relative z-10 container mx-auto px-4 lg:px-8 flex flex-col h-full">
               <div className="flex-grow flex flex-col justify-center">
                 <div className="max-w-2xl">
-                  {/* Badge o elemento decorativo */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-6">
-                    <span className="relative flex h-2 w-2 mr-1">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-                    </span>
-                    <span className="text-white text-sm font-medium">Lotes disponibles</span>
-                  </div>
-
                   <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl !leading-tight">
                     El lugar de tus
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300">
@@ -115,9 +107,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               </div>
 
               {/* Buscador inferior */}
-              <div className="relative mt-auto mb-8 lg:mb-16 w-full">
-                <div className="bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-2xl shadow-2xl">
-                  <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-4 text-white">
+              <div className="relative mt-auto mb-8 lg:mb-16 w-full flex justify-center">
+                <div className="bg-white bg-opacity-20 backdrop-blur-md p-3 rounded-2xl shadow-2xl max-w-4xl w-full">
+                  <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-3 text-white">
                     <div className="col-span-2 md:col-span-1 border-r border-white/30 pr-4">
                       <label className="text-xs font-bold block">Ubicación</label>
                       <input type="text" placeholder="Buscar ubicaciones" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
@@ -163,7 +155,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </section>
 
           {/* Nueva sección Nosotros con 3 contenedores horizontales */}
-          <section className="py-20 px-4" style={{ backgroundColor: '#3D5743' }}>
+          <section id="nosotros-section" className="py-20 px-4" style={{ backgroundColor: '#3D5743' }}>
             <div className="container mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
 
@@ -240,7 +232,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </section>
 
           {/* Content Sections */}
-          <div className="flex w-full flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8 bg-white">
+          <div id="white-section" className="flex w-full flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8 bg-white">
             <div className="@container">
               <div className="@[480px]:p-0">
                 {/* Featured Listings Section */}

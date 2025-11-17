@@ -1,155 +1,194 @@
-import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaFacebook, FaInstagram, FaPinterest } from "react-icons/fa";
 
 interface Footer7Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
-  sections?: Array<{
-    title: string;
-    links: Array<{ name: string; href: string }>;
-  }>;
-  description?: string;
-  socialLinks?: Array<{
-    icon: React.ReactElement;
-    href: string;
-    label: string;
-  }>;
-  copyright?: string;
-  legalLinks?: Array<{
-    name: string;
-    href: string;
-  }>;
   onNavigate?: (page: string) => void;
 }
 
-const estacionParisSections = [
-  {
-    title: "Productos",
-    links: [
-      { name: "Inicio", href: "#home" },
-      { name: "Lotes", href: "#lotes" },
-      { name: "Nosotros", href: "#nosotros" },
-      { name: "Contacto", href: "#contacto" },
-    ],
-  },
-  {
-    title: "Empresa",
-    links: [
-      { name: "Sobre Nosotros", href: "#nosotros" },
-      { name: "Nuestro Equipo", href: "#nosotros" },
-      { name: "Proyectos", href: "#lotes" },
-      { name: "Testimonios", href: "#home" },
-    ],
-  },
-  {
-    title: "Recursos",
-    links: [
-      { name: "Ayuda", href: "#contacto" },
-      { name: "Ventas", href: "#contacto" },
-      { name: "Términos", href: "#politica" },
-      { name: "Privacidad", href: "#politica" },
-    ],
-  },
-];
+export const Footer7 = ({ onNavigate }: Footer7Props) => {
+  const [email, setEmail] = useState("");
 
-const estacionParisSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "https://instagram.com/estacionparis", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "https://facebook.com/estacionparis", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "https://twitter.com/estacionparis", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "https://linkedin.com/company/estacionparis", label: "LinkedIn" },
-];
+  const handleLinkClick = (page: string) => {
+    onNavigate?.(page);
+  };
 
-const estacionParisLegalLinks = [
-  { name: "Términos y Condiciones", href: "#politica" },
-  { name: "Política de Privacidad", href: "#politica" },
-];
-
-export const Footer7 = ({
-  logo = {
-    url: "#home",
-    src: "data:image/svg+xml,%3Csvg fill='none' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z' fill='currentColor'/%3E%3C/svg%3E",
-    alt: "Estacion Paris Logo",
-    title: "Estacion Paris",
-  },
-  sections = estacionParisSections,
-  description = "Invirtiendo en tu futuro, lote a lote. Descubre los mejores terrenos en Argentina para construir el hogar de tus sueños.",
-  socialLinks = estacionParisSocialLinks,
-  copyright = "© 2024 Estacion Paris. Todos los derechos reservados.",
-  legalLinks = estacionParisLegalLinks,
-  onNavigate,
-}: Footer7Props) => {
-  const handleLinkClick = (href: string) => {
-    if (href.startsWith("#")) {
-      const page = href.slice(1); // Remove the '#' prefix
-      onNavigate?.(page);
-    }
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Aquí puedes agregar la lógica para enviar el email
+    console.log("Newsletter email:", email);
+    setEmail("");
   };
 
   return (
-    <section className="py-32" style={{backgroundColor: '#4A2C2A'}}>
-      <div className="container mx-auto">
-        <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
-          <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
-            {/* Logo */}
-            <div className="flex items-center gap-2 lg:justify-start">
-              <a href={logo.url} onClick={(e) => { e.preventDefault(); handleLinkClick(logo.url); }}>
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  title={logo.title}
-                  className="h-8"
-                />
-              </a>
-              <h2 className="text-xl font-semibold text-white">{logo.title}</h2>
+    <footer className="bg-black text-white">
+      <div className="container mx-auto px-4 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* Columna 1: Newsletter (arriba) y Contacto (abajo) */}
+          <div className="flex flex-col space-y-6">
+            {/* Newsletter - Primera sección */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Únete a nuestro newsletter</h3>
             </div>
-            <p className="max-w-[70%] text-sm text-gray-300">
-              {description}
-            </p>
-            <ul className="flex items-center space-x-6 text-gray-300">
-              {socialLinks.map((social, idx) => (
-                <li key={idx} className="font-medium hover:text-white">
-                  <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
-                    {social.icon}
-                  </a>
-                </li>
-              ))}
-            </ul>
+
+            {/* Contacto - Segunda sección */}
+            <div className="space-y-2 text-sm text-white/70">
+              <p className="font-semibold text-white mb-2">Contacto</p>
+              <p>+54 11 1234-5678</p>
+              <p>info@estacionparis.com</p>
+              <p>Buenos Aires, Argentina</p>
+            </div>
           </div>
-          <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
-            {sections.map((section, sectionIdx) => (
-              <div key={sectionIdx}>
-                <h3 className="mb-4 font-bold text-white">{section.title}</h3>
-                <ul className="space-y-3 text-sm text-gray-300">
-                  {section.links.map((link, linkIdx) => (
-                    <li
-                      key={linkIdx}
-                      className="font-medium hover:text-white"
-                    >
-                      <a href={link.href} onClick={(e) => { e.preventDefault(); handleLinkClick(link.href); }}>
-                        {link.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+
+          {/* Columna 2: Logo (arriba) y Menú de navegación (abajo) */}
+          <div className="flex flex-col items-center space-y-6">
+            {/* Logo - Primera sección */}
+            <div>
+              <svg
+                className="w-12 h-12 text-white"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 4L4 12V36L24 44L44 36V12L24 4Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M24 4V44M4 12L24 20L44 12M4 36L24 28L44 36"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+
+            {/* Menú de navegación - Segunda sección */}
+            <nav className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm">
+              <a
+                href="#nosotros"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("nosotros");
+                }}
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Sobre Nosotros
+              </a>
+              <a
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("contacto");
+                }}
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Contacto
+              </a>
+              <a
+                href="#lotes"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("lotes");
+                }}
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Comprar
+              </a>
+              <a
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick("contacto");
+                }}
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Vender
+              </a>
+            </nav>
+          </div>
+
+          {/* Columna 3: Newsletter input (arriba) y Enlaces sociales (abajo) */}
+          <div className="flex flex-col items-start md:items-end space-y-6">
+            {/* Newsletter input - Primera sección */}
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full md:w-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Tu dirección de email"
+                className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-white text-black rounded-lg px-4 py-2 hover:bg-white/90 transition-colors flex items-center justify-center"
+                aria-label="Enviar email"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            {/* Enlaces Sociales - Segunda sección */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Enlaces Sociales</h3>
+              <div className="flex flex-col space-y-3">
+              <a
+                href="https://instagram.com/estacionparis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FaInstagram className="w-5 h-5" />
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://facebook.com/estacionparis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FaFacebook className="w-5 h-5" />
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://pinterest.com/estacionparis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <FaPinterest className="w-5 h-5" />
+                <span>Pinterest</span>
+              </a>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-gray-600 py-8 text-xs font-medium text-gray-300 md:flex-row md:items-center md:text-left">
-          <p className="order-2 lg:order-1">{copyright}</p>
-          <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
-            {legalLinks.map((link, idx) => (
-              <li key={idx} className="hover:text-white">
-                <a href={link.href} onClick={(e) => { e.preventDefault(); handleLinkClick(link.href); }}> {link.name}</a>
-              </li>
-            ))}
-          </ul>
+
+        {/* Copyright */}
+        <div className="border-t border-white/20 pt-6 mt-8">
+          <div className="flex justify-center items-center text-sm text-white/70">
+            <p>Copyright © Estacion Paris. Todos los derechos reservados.</p>
+          </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };

@@ -3,43 +3,43 @@ import React from 'react';
 const Contacto: React.FC = () => {
   return (
     <>
-      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" style={{backgroundColor: '#f8f6f6'}}>
+      <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden bg-white">
         <main className="flex flex-1 justify-center py-10 sm:py-16 px-4 sm:px-6">
           <div className="flex flex-col w-full">
             {/* PageHeading */}
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <div className="flex min-w-72 flex-col gap-3">
-                <h1 className="text-[#1a0f0f] text-4xl font-black leading-tight tracking-[-0.033em]">Contacto</h1>
-                <p className="text-[#915555] text-base font-normal leading-normal">Déjenos su consulta y le responderemos a la brevedad.</p>
+                <h1 className="text-gray-900 text-4xl font-black leading-tight tracking-[-0.033em]">Contacto</h1>
+                <p className="text-gray-600 text-base font-normal leading-normal">Déjenos su consulta y le responderemos a la brevedad.</p>
               </div>
             </div>
 
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-12 p-4">
               {/* Left Column: Form */}
               <div className="lg:col-span-3">
-                <h2 className="text-[#005A87] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Formulario de Contacto</h2>
+                  <h2 className="text-gray-900 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Formulario de Contacto</h2>
                 <form className="space-y-6">
                   <label className="flex flex-col min-w-40 flex-1">
-                    <p className="text-[#005A87] text-base font-medium leading-normal pb-2">Nombre</p>
+                    <p className="text-gray-900 text-base font-medium leading-normal pb-2">Nombre</p>
                     <input
-                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1a0f0f] focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#e5d2d2] bg-[#f8f6f6] focus:border-primary h-14 placeholder:text-[#915555] p-[15px] text-base font-normal leading-normal"
+                      className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-[#E9C874]/50 border border-gray-300 bg-white focus:border-[#E9C874] h-14 placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
                       placeholder="Ingrese su nombre completo"
                     />
                   </label>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <label className="flex flex-col min-w-40 flex-1">
-                      <p className="text-[#005A87] text-base font-medium leading-normal pb-2">Email</p>
+                      <p className="text-gray-900 text-base font-medium leading-normal pb-2">Email</p>
                       <input
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1a0f0f] focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#e5d2d2] bg-[#f8f6f6] focus:border-primary h-14 placeholder:text-[#915555] p-[15px] text-base font-normal leading-normal"
+                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-[#E9C874]/50 border border-gray-300 bg-white focus:border-[#E9C874] h-14 placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
                         placeholder="su-email@ejemplo.com"
                         type="email"
                       />
                     </label>
                     <label className="flex flex-col min-w-40 flex-1">
-                      <p className="text-[#005A87] text-base font-medium leading-normal pb-2">Teléfono</p>
+                      <p className="text-gray-900 text-base font-medium leading-normal pb-2">Teléfono</p>
                       <input
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1a0f0f] focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#e5d2d2] bg-[#f8f6f6] focus:border-primary h-14 placeholder:text-[#915555] p-[15px] text-base font-normal leading-normal"
+                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-[#E9C874]/50 border border-gray-300 bg-white focus:border-[#E9C874] h-14 placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
                         placeholder="Su número de teléfono"
                         type="tel"
                       />
@@ -47,14 +47,14 @@ const Contacto: React.FC = () => {
                   </div>
 
                   <label className="flex flex-col min-w-40 flex-1">
-                    <p className="text-[#005A87] text-base font-medium leading-normal pb-2">Mensaje</p>
+                    <p className="text-gray-900 text-base font-medium leading-normal pb-2">Mensaje</p>
                     <textarea
-                      className="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-lg text-[#1a0f0f] focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#e5d2d2] bg-[#f8f6f6] focus:border-primary min-h-[160px] placeholder:text-[#915555] p-[15px] text-base font-normal leading-normal"
+                      className="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-lg text-gray-900 focus:outline-0 focus:ring-2 focus:ring-[#E9C874]/50 border border-gray-300 bg-white focus:border-[#E9C874] min-h-[160px] placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
                       placeholder="Escriba aquí su consulta..."
                     ></textarea>
                   </label>
 
-                  <button className="flex w-full sm:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[#CF2E2E] text-white text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                  <button className="flex w-full sm:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[#E9C874] text-black text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors">
                     <span className="truncate">Enviar</span>
                   </button>
                 </form>
@@ -63,32 +63,32 @@ const Contacto: React.FC = () => {
               {/* Right Column: Contact Info & Map */}
               <div className="lg:col-span-2 space-y-10">
                 <div>
-                  <h3 className="text-[#005A87] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Otras Vías de Contacto</h3>
+                  <h3 className="text-gray-900 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Otras Vías de Contacto</h3>
                   <div className="space-y-4">
                     <a className="flex items-center gap-4 group" href="tel:+5491123456789">
-                      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                      <div className="flex items-center justify-center size-10 rounded-lg bg-[#E9C874]/20 text-[#E9C874]">
                         <span className="material-symbols-outlined">call</span>
                       </div>
-                      <span className="text-[#1a0f0f] text-base font-medium leading-normal group-hover:text-primary transition-colors">+54 9 11 2345-6789</span>
+                      <span className="text-gray-900 text-base font-medium leading-normal group-hover:text-[#E9C874] transition-colors">+54 9 11 2345-6789</span>
                     </a>
                     <a className="flex items-center gap-4 group" href="mailto:consultas@estacionparis.com.ar">
-                      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                      <div className="flex items-center justify-center size-10 rounded-lg bg-[#E9C874]/20 text-[#E9C874]">
                         <span className="material-symbols-outlined">email</span>
                       </div>
-                      <span className="text-[#1a0f0f] text-base font-medium leading-normal group-hover:text-primary transition-colors">consultas@estacionparis.com.ar</span>
+                      <span className="text-gray-900 text-base font-medium leading-normal group-hover:text-[#E9C874] transition-colors">consultas@estacionparis.com.ar</span>
                     </a>
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                      <div className="flex items-center justify-center size-10 rounded-lg bg-[#E9C874]/20 text-[#E9C874]">
                         <span className="material-symbols-outlined">location_on</span>
                       </div>
-                      <span className="text-[#1a0f0f] text-base font-medium leading-normal">Av. Corrientes 1234, CABA, Argentina</span>
+                      <span className="text-gray-900 text-base font-medium leading-normal">Av. Corrientes 1234, CABA, Argentina</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-[#005A87] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Nuestra Ubicación</h3>
-                  <div className="aspect-video w-full overflow-hidden rounded-xl border border-[#e5d2d2]">
+                  <h3 className="text-gray-900 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Nuestra Ubicación</h3>
+                    <div className="aspect-video w-full overflow-hidden rounded-xl border border-gray-300">
                     <iframe
                       allowFullScreen={true}
                       data-location="Buenos Aires, Argentina"

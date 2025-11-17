@@ -7,7 +7,7 @@ interface LotesProps {
 const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
   return (
     <>
-      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden" style={{backgroundColor: '#f8f6f6'}}>
+      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-white">
         <main className="flex-1">
           <div className="flex flex-wrap justify-between items-center gap-4 p-4">
             <h1 className="text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] min-w-72 text-gray-900">Nuestros Lotes Exclusivos</h1>
@@ -101,8 +101,7 @@ const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
                 <p className="text-2xl font-black text-gray-900 mb-4">$50,000 USD</p>
                 <button
                   onClick={() => onNavigate('detalles', { loteId: '15A' })}
-                  className="w-full text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
-                  style={{backgroundColor: '#CF2E2E'}}
+                  className="w-full bg-[#E9C874] text-black font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
                 >
                   Ver Detalles
                 </button>
@@ -132,8 +131,7 @@ const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
                 <p className="text-2xl font-black text-gray-900 mb-4">$72,000 USD</p>
                 <button
                   onClick={() => onNavigate('detalles', { loteId: '22B' })}
-                  className="w-full text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
-                  style={{backgroundColor: '#CF2E2E'}}
+                  className="w-full bg-[#E9C874] text-black font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
                 >
                   Ver Detalles
                 </button>
@@ -188,8 +186,7 @@ const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
                 <p className="text-2xl font-black text-gray-900 mb-4">$95,000 USD</p>
                 <button
                   onClick={() => onNavigate('detalles', { loteId: '31A' })}
-                  className="w-full text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
-                  style={{backgroundColor: '#CF2E2E'}}
+                  className="w-full bg-[#E9C874] text-black font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
                 >
                   Ver Detalles
                 </button>
@@ -219,8 +216,7 @@ const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
                 <p className="text-2xl font-black text-gray-900 mb-4">$61,000 USD</p>
                 <button
                   onClick={() => onNavigate('detalles', { loteId: '05D' })}
-                  className="w-full text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
-                  style={{backgroundColor: '#CF2E2E'}}
+                  className="w-full bg-[#E9C874] text-black font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
                 >
                   Ver Detalles
                 </button>
@@ -250,8 +246,7 @@ const Lotes: React.FC<LotesProps> = ({ onNavigate }) => {
                 <p className="text-2xl font-black text-gray-900 mb-4">$78,500 USD</p>
                 <button
                   onClick={() => onNavigate('detalles', { loteId: '19F' })}
-                  className="w-full text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
-                  style={{backgroundColor: '#CF2E2E'}}
+                  className="w-full bg-[#E9C874] text-black font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
                 >
                   Ver Detalles
                 </button>
