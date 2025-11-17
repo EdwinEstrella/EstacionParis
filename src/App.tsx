@@ -133,6 +133,75 @@ function App() {
       <Footer7 onNavigate={handleNavigation} />
       <ChatBot />
 
+      {/* Popup Buscador - Mobile - Global */}
+      {isSearchOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsSearchOpen(false)}
+        >
+          {/* Fondo oscuro */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          
+          {/* Contenedor del buscador */}
+          <div 
+            className="relative z-10 bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-2xl shadow-2xl w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botón cerrar */}
+            <button
+              onClick={() => setIsSearchOpen(false)}
+              className="absolute top-3 right-3 text-white hover:text-gray-300 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Buscador */}
+            <div className="grid grid-cols-1 gap-4 text-white">
+              <div>
+                <label className="text-sm font-bold block mb-2">Ubicación</label>
+                <input 
+                  type="text" 
+                  placeholder="Buscar ubicaciones" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Tamaño</label>
+                <input 
+                  type="text" 
+                  placeholder="m²" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Presupuesto</label>
+                <input 
+                  type="text" 
+                  placeholder="Max $" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-bold block mb-2">Tipo</label>
+                <input 
+                  type="text" 
+                  placeholder="Residencial" 
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 w-full text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#E9C874]"
+                />
+              </div>
+              <button className="bg-[#E9C874] text-black rounded-lg py-3 px-6 font-bold hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Cookie Consent System - COMENTADO TEMPORALMENTE */}
       {/* {!cookieConsent && (
         <CookieConsent
