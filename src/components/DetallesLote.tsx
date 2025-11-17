@@ -231,9 +231,9 @@ const DetallesLote: React.FC<DetallesLoteProps> = ({ loteId = "15A" }) => {
 
               {/* Right Column: CTA Card */}
               <FadeIn direction="left" delay={250}>
-                <div className="w-full lg:w-1/3">
+                <div className="w-full lg:w-1/3 lg:flex-shrink-0">
                   <div className="sticky top-24">
-                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
+                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200 lg:min-w-[320px]">
                       <p className="text-sm text-gray-500 mb-2">Precio de lista</p>
                       <p className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">{lote.precio}</p>
                       <p className="text-base text-gray-600 mb-6">Financiación disponible con planes flexibles.</p>
