@@ -19,6 +19,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     const steps = 60;
     const interval = duration / steps;
 
+    // Array to store all timer IDs for cleanup
+    const timers: NodeJS.Timeout[] = [];
+
     const incrementCounter = (target: number, setter: React.Dispatch<React.SetStateAction<number>>) => {
       let current = 0;
       const step = target / steps;
@@ -27,10 +30,18 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         if (current >= target) {
           setter(target);
           clearInterval(timer);
+          // Remove timer from array when it completes
+          const index = timers.indexOf(timer);
+          if (index > -1) {
+            timers.splice(index, 1);
+          }
         } else {
           setter(Math.floor(current));
         }
       }, interval);
+      // Store timer ID for cleanup
+      timers.push(timer);
+      return timer;
     };
 
     incrementCounter(500, setContador1);
@@ -38,6 +49,9 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     incrementCounter(8, setContador3);
 
     return () => {
+      // Clear all active timers to prevent memory leaks
+      timers.forEach(timer => clearInterval(timer));
+      // Reset state
       setContador1(0);
       setContador2(0);
       setContador3(0);

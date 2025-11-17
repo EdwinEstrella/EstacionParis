@@ -49,6 +49,11 @@ function App() {
     cacheManager.set('current_page', currentPage, 5 * 60 * 1000); // 5 minutes
   }, [currentPage]);
 
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
   const handleNavigation = (page: string, params?: NavigationParams) => {
     setCurrentPage(page);
     addToNavigationHistory(page);
