@@ -94,7 +94,7 @@ function App() {
     const pageContent = () => {
       switch (currentPage) {
         case 'nosotros':
-          return <Nosotros />;
+          return <Nosotros onNavigate={handleNavigation} />;
         case 'lotes':
           return <Lotes onNavigate={handleNavigation} />;
         case 'detalles':
@@ -109,8 +109,8 @@ function App() {
       }
     };
 
-    // Agregar padding top para páginas que no son home
-    if (currentPage === 'home') {
+    // Agregar padding top para páginas que no son home o nosotros (que tienen hero sections)
+    if (currentPage === 'home' || currentPage === 'nosotros') {
       return pageContent();
     }
 

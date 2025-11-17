@@ -7,11 +7,14 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Inicializar isScrolled basándose en la página actual
+  const [isScrolled, setIsScrolled] = useState(() => {
+    return currentPage === 'nosotros' || currentPage === 'lotes' || currentPage === 'contacto' || currentPage === 'detalles';
+  });
 
   useEffect(() => {
     // En páginas con fondo claro, el header debe ser blanco desde el inicio
-    if (currentPage === 'nosotros' || currentPage === 'lotes' || currentPage === 'contacto') {
+    if (currentPage === 'nosotros' || currentPage === 'lotes' || currentPage === 'contacto' || currentPage === 'detalles') {
       setIsScrolled(true);
       return;
     }

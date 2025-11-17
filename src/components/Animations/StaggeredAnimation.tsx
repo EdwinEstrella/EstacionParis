@@ -2,7 +2,7 @@ import React from 'react';
 import FadeIn from './FadeIn';
 
 interface StaggeredAnimationProps {
-  children: React.ReactNode[];
+  children: React.ReactNode;
   baseDelay?: number;
   staggerDelay?: number;
   duration?: number;

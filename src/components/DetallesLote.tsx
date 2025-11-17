@@ -1,4 +1,6 @@
 import React from 'react';
+import FadeIn from './Animations/FadeIn';
+import StaggeredAnimation from './Animations/StaggeredAnimation';
 
 interface DetallesLoteProps {
   loteId?: string;
@@ -74,133 +76,186 @@ const DetallesLote: React.FC<DetallesLoteProps> = ({ loteId = "15A" }) => {
 
   return (
     <>
-      <div className="relative flex min-h-screen w-full flex-col" style={{backgroundColor: '#f8f6f6'}}>
-        {/* Main Content */}
+      <div className="relative flex min-h-screen w-full flex-col bg-gray-50">
         <main className="flex-grow">
-          <div className="w-full px-4 py-8 md:py-12">
+          <div className="container mx-auto max-w-7xl px-4 py-8 md:py-12">
             {/* Breadcrumbs */}
-              <div className="flex flex-wrap gap-2 mb-6">
+            <FadeIn direction="left" delay={50}>
+              <div className="flex flex-wrap gap-2 mb-8">
                 <a
-                  className="text-gray-500 text-sm font-medium leading-normal hover:text-primary transition-colors cursor-pointer"
+                  className="text-gray-500 text-sm font-medium leading-normal hover:text-[#E9C874] transition-colors cursor-pointer"
                   onClick={() => window.history.back()}
                 >
                   Inicio
                 </a>
-                <span className="text-gray-500 text-sm font-medium leading-normal">/</span>
+                <span className="text-gray-400">/</span>
                 <a
-                  className="text-gray-500 text-sm font-medium leading-normal hover:text-primary transition-colors cursor-pointer"
+                  className="text-gray-500 text-sm font-medium leading-normal hover:text-[#E9C874] transition-colors cursor-pointer"
                   onClick={() => window.history.back()}
                 >
                   Lotes
                 </a>
-                <span className="text-gray-500 text-sm font-medium leading-normal">/</span>
-                <span className="text-[#1a0f0f] text-sm font-medium leading-normal">Lote #{loteId}</span>
+                <span className="text-gray-400">/</span>
+                <span className="text-gray-900 text-sm font-semibold">Lote #{loteId}</span>
               </div>
+            </FadeIn>
 
-              {/* Image Gallery */}
-              <div className="mb-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {/* Image Gallery */}
+            <FadeIn direction="up" delay={100}>
+              <div className="mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="md:col-span-2">
                     <div
-                      className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-[#fbf9f9] rounded-xl min-h-96"
+                      className="bg-cover bg-center overflow-hidden bg-gray-100 rounded-2xl min-h-[500px] shadow-lg hover:shadow-xl transition-shadow duration-300"
                       data-alt="Aerial view of the large, grassy land lot with some trees."
                       style={{backgroundImage: `url("${lote.imagenPrincipal}")`}}
-                    >
-                    </div>
+                    />
                   </div>
-                  <div
-                    className="h-48 bg-cover bg-center rounded-xl"
-                    data-alt="Close-up view of the terrain and vegetation on the lot."
-                    style={{backgroundImage: `url("${lote.imagenSecundaria1}")`}}
-                  ></div>
-                  <div
-                    className="h-48 bg-cover bg-center rounded-xl"
-                    data-alt="View from the lot looking out towards the horizon."
-                    style={{backgroundImage: `url("${lote.imagenSecundaria2}")`}}
-                  ></div>
-                </div>
-                <div className="flex justify-center gap-2 p-4">
-                  <div className="h-2 w-8 rounded-full bg-primary"></div>
-                  <div className="h-2 w-2 rounded-full bg-gray-300"></div>
-                  <div className="h-2 w-2 rounded-full bg-gray-300"></div>
-                  <div className="h-2 w-2 rounded-full bg-gray-300"></div>
+                  <div className="flex flex-col gap-4">
+                    <div
+                      className="h-48 bg-cover bg-center rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+                      data-alt="Close-up view of the terrain and vegetation on the lot."
+                      style={{backgroundImage: `url("${lote.imagenSecundaria1}")`}}
+                    />
+                    <div
+                      className="h-48 bg-cover bg-center rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
+                      data-alt="View from the lot looking out towards the horizon."
+                      style={{backgroundImage: `url("${lote.imagenSecundaria2}")`}}
+                    />
+                  </div>
                 </div>
               </div>
+            </FadeIn>
 
-              {/* Content: Details & CTA */}
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                {/* Left Column: Lot Information */}
-                <div className="w-full lg:w-2/3">
-                  <p className="text-[#1a0f0f] text-4xl font-black leading-tight tracking-[-0.033em] mb-4">{lote.nombre}</p>
-                  <p className="text-gray-600 text-base font-normal leading-relaxed mb-8">{lote.descripcion}</p>
-
-                  <div className="border-t border-gray-200/80 pt-6">
-                    <h3 className="text-xl font-bold text-[#005A87] mb-4">Especificaciones</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-gray-700">
-                      <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#005A87]">square_foot</span>
-                        <span><strong>Área:</strong> {lote.area}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#005A87]">straighten</span>
-                        <span><strong>Dimensiones:</strong> {lote.dimensiones}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#005A87]">gavel</span>
-                        <span><strong>Estado Legal:</strong> {lote.estadoLegal}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#005A87]">detection_and_zone</span>
-                        <span><strong>Zonificación:</strong> {lote.zonificacion}</span>
-                      </div>
-                    </div>
+            {/* Content: Details & CTA */}
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+              {/* Left Column: Lot Information */}
+              <div className="w-full lg:w-2/3 space-y-8">
+                <FadeIn direction="up" delay={200}>
+                  <div>
+                    <h1 className="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-4 text-gray-900">{lote.nombre}</h1>
+                    <p className="text-lg text-gray-600 leading-relaxed">{lote.descripcion}</p>
                   </div>
+                </FadeIn>
 
-                  <div className="border-t border-gray-200/80 pt-6 mt-6">
-                    <h3 className="text-xl font-bold text-[#005A87] mb-4">Servicios Disponibles</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-gray-700">
-                      <div className="flex items-center gap-3">
-                        <span className={`material-symbols-outlined ${lote.servicios.agua ? 'text-green-600' : 'text-gray-400'}`}>water_drop</span>
-                        <span>Agua Corriente</span>
+                <FadeIn direction="up" delay={300}>
+                  <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                      <span className="material-symbols-outlined text-[#E9C874]">info</span>
+                      Especificaciones
+                    </h3>
+                    <StaggeredAnimation baseDelay={350} staggerDelay={50} direction="up">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                          <span className="material-symbols-outlined text-[#E9C874] text-2xl">square_foot</span>
+                          <div>
+                            <p className="text-sm text-gray-500">Área</p>
+                            <p className="text-lg font-semibold text-gray-900">{lote.area}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                          <span className="material-symbols-outlined text-[#E9C874] text-2xl">straighten</span>
+                          <div>
+                            <p className="text-sm text-gray-500">Dimensiones</p>
+                            <p className="text-lg font-semibold text-gray-900">{lote.dimensiones}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                          <span className="material-symbols-outlined text-[#E9C874] text-2xl">gavel</span>
+                          <div>
+                            <p className="text-sm text-gray-500">Estado Legal</p>
+                            <p className="text-lg font-semibold text-gray-900">{lote.estadoLegal}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                          <span className="material-symbols-outlined text-[#E9C874] text-2xl">detection_and_zone</span>
+                          <div>
+                            <p className="text-sm text-gray-500">Zonificación</p>
+                            <p className="text-lg font-semibold text-gray-900">{lote.zonificacion}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className={`material-symbols-outlined ${lote.servicios.electricidad ? 'text-green-600' : 'text-gray-400'}`}>bolt</span>
-                        <span>Electricidad</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className={`material-symbols-outlined ${lote.servicios.gas ? 'text-green-600' : 'text-gray-400'}`}>local_fire_department</span>
-                        <span>Gas {lote.servicios.gas ? '' : '(Proyecto)'}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className={`material-symbols-outlined ${lote.servicios.internet ? 'text-green-600' : 'text-gray-400'}`}>wifi</span>
-                        <span>Internet Fibra Óptica</span>
-                      </div>
-                    </div>
+                    </StaggeredAnimation>
                   </div>
-                </div>
+                </FadeIn>
 
-                {/* Right Column: CTA Card */}
+                <FadeIn direction="up" delay={400}>
+                  <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                      <span className="material-symbols-outlined text-[#E9C874]">build</span>
+                      Servicios Disponibles
+                    </h3>
+                    <StaggeredAnimation baseDelay={450} staggerDelay={50} direction="up">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className={`flex items-center gap-3 p-4 rounded-lg border-2 ${lote.servicios.agua ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                          <span className={`material-symbols-outlined text-2xl ${lote.servicios.agua ? 'text-green-600' : 'text-gray-400'}`}>water_drop</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">Agua Corriente</p>
+                            <p className={`text-sm ${lote.servicios.agua ? 'text-green-600' : 'text-gray-500'}`}>
+                              {lote.servicios.agua ? 'Disponible' : 'No disponible'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className={`flex items-center gap-3 p-4 rounded-lg border-2 ${lote.servicios.electricidad ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                          <span className={`material-symbols-outlined text-2xl ${lote.servicios.electricidad ? 'text-green-600' : 'text-gray-400'}`}>bolt</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">Electricidad</p>
+                            <p className={`text-sm ${lote.servicios.electricidad ? 'text-green-600' : 'text-gray-500'}`}>
+                              {lote.servicios.electricidad ? 'Disponible' : 'No disponible'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className={`flex items-center gap-3 p-4 rounded-lg border-2 ${lote.servicios.gas ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                          <span className={`material-symbols-outlined text-2xl ${lote.servicios.gas ? 'text-green-600' : 'text-gray-400'}`}>local_fire_department</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">Gas</p>
+                            <p className={`text-sm ${lote.servicios.gas ? 'text-green-600' : 'text-gray-500'}`}>
+                              {lote.servicios.gas ? 'Disponible' : 'En proyecto'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className={`flex items-center gap-3 p-4 rounded-lg border-2 ${lote.servicios.internet ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
+                          <span className={`material-symbols-outlined text-2xl ${lote.servicios.internet ? 'text-green-600' : 'text-gray-400'}`}>wifi</span>
+                          <div>
+                            <p className="font-semibold text-gray-900">Internet Fibra Óptica</p>
+                            <p className={`text-sm ${lote.servicios.internet ? 'text-green-600' : 'text-gray-500'}`}>
+                              {lote.servicios.internet ? 'Disponible' : 'No disponible'}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </StaggeredAnimation>
+                  </div>
+                </FadeIn>
+              </div>
+
+              {/* Right Column: CTA Card */}
+              <FadeIn direction="left" delay={250}>
                 <div className="w-full lg:w-1/3">
                   <div className="sticky top-24">
-                    <div className="border rounded-xl p-6 bg-white shadow-sm">
-                      <p className="text-sm text-gray-500">Precio de lista</p>
-                      <p className="text-4xl font-extrabold text-[#1a0f0f] my-1">{lote.precio}</p>
-                      <p className="text-base text-gray-600 mb-6">Financiación disponible.</p>
-                      <button className="w-full flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[#CF2E2E] text-white text-base font-bold leading-normal tracking-wide hover:bg-opacity-90 transition-colors">
-                        <span className="truncate">Consultar por este Lote</span>
-                      </button>
-                      <button className="w-full mt-3 flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[#FF6900]/10 text-[#FF6900] text-base font-bold leading-normal tracking-wide hover:bg-[#FF6900]/20 transition-colors">
-                        <span className="truncate">Agendar Visita</span>
-                      </button>
+                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
+                      <p className="text-sm text-gray-500 mb-2">Precio de lista</p>
+                      <p className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">{lote.precio}</p>
+                      <p className="text-base text-gray-600 mb-6">Financiación disponible con planes flexibles.</p>
+                      <div className="space-y-3">
+                        <button className="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-[#E9C874] text-black text-base font-bold hover:bg-[#E9C874]/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                          <span>Consultar por este Lote</span>
+                        </button>
+                        <button className="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-transparent border-2 border-[#E9C874] text-[#E9C874] text-base font-bold hover:bg-[#E9C874]/10 transition-all duration-300">
+                          <span>Agendar Visita</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </FadeIn>
+            </div>
 
-              {/* Location Map Section */}
-              <div className="mt-12 pt-8 border-t border-gray-200/80">
-                <h2 className="text-2xl font-bold text-center text-[#005A87] mb-6">Ubicación Exacta</h2>
-                <div className="aspect-video w-full bg-gray-200 rounded-xl overflow-hidden">
+            {/* Location Map Section */}
+            <FadeIn direction="up" delay={500}>
+              <div className="mt-16 pt-12 border-t border-gray-200">
+                <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Ubicación Exacta</h2>
+                <div className="aspect-video w-full bg-gray-200 rounded-2xl overflow-hidden shadow-lg">
                   <img
                     alt="Map showing the location of the property in a rural area."
                     className="w-full h-full object-cover"
@@ -208,7 +263,8 @@ const DetallesLote: React.FC<DetallesLoteProps> = ({ loteId = "15A" }) => {
                   />
                 </div>
               </div>
-            </div>
+            </FadeIn>
+          </div>
         </main>
       </div>
     </>

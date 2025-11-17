@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FadeIn from './Animations/FadeIn';
 import StaggeredAnimation from './Animations/StaggeredAnimation';
 import { TestimonialsSectionDemo } from './ui/TestimonialsWithMarquee';
-import { InstagramIcon, LinkedinIcon, ArrowRightIcon } from './icons';
+import { InstagramIcon, LinkedinIcon } from './icons';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
@@ -20,7 +20,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     const interval = duration / steps;
 
     // Array to store all timer IDs for cleanup
-    const timers: NodeJS.Timeout[] = [];
+    const timers: ReturnType<typeof setInterval>[] = [];
 
     const incrementCounter = (target: number, setter: React.Dispatch<React.SetStateAction<number>>) => {
       let current = 0;
@@ -74,81 +74,96 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               />
             </div>
 
-            <div className="relative z-10 container mx-auto px-4 lg:px-8 flex flex-col h-full">
-              <div className="flex-grow flex flex-col justify-center">
-                <div className="max-w-2xl">
-                  <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl !leading-tight">
-                    El lugar de tus
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300">
-                      sueños te espera
-                    </span>
-                  </h1>
-                  <p className="mt-6 text-lg max-w-md">
-                    Descubre el lugar ideal para construir tu hogar en Argentina.
-                  </p>
-                  <button
-                    onClick={() => onNavigate?.('lotes')}
-                    className="mt-8 bg-[#E9C874] text-black px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-colors"
-                  >
-                    Ver Lotes Disponibles
-                  </button>
-                </div>
-              </div>
+            <div className="relative z-10 w-full h-full">
+              <div className="container mx-auto px-4 lg:px-8 flex flex-col h-full">
+                <div className="flex-grow flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
+                  {/* Contenido principal - Izquierda */}
+                  <div className="flex flex-col justify-center lg:w-1/2">
+                    <FadeIn direction="up" delay={100}>
+                      <div className="max-w-2xl">
+                        <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl !leading-tight">
+                          El lugar de tus
+                          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300">
+                            sueños te espera
+                          </span>
+                        </h1>
+                        <p className="mt-6 text-lg max-w-md">
+                          Descubre el lugar ideal para construir tu hogar en Argentina.
+                        </p>
+                        <button
+                          onClick={() => onNavigate?.('lotes')}
+                          className="mt-8 bg-[#E9C874] text-black px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                        >
+                          Ver Lotes Disponibles
+                        </button>
+                      </div>
+                    </FadeIn>
+                  </div>
 
-              {/* Tarjeta de lote lateral */}
-              <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 right-8 bg-white bg-opacity-10 backdrop-blur-md p-4 rounded-2xl w-80 shadow-lg border border-white/20">
-                <div className="relative h-32 overflow-hidden rounded-lg mb-3">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center rounded-lg"
-                    style={{
-                      backgroundImage: 'url("/other_house.jpg")'
-                    }}
-                  ></div>
-                  <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                    Disponible
+                  {/* Tarjeta de lote lateral - Derecha */}
+                  <div className="flex justify-center lg:justify-end lg:w-1/2">
+                    <FadeIn direction="right" delay={300}>
+                      <div className="hidden lg:block bg-white bg-opacity-10 backdrop-blur-md p-4 rounded-2xl w-80 shadow-lg border border-white/20 hover:bg-opacity-20 transition-all duration-300 z-30">
+                        <div className="relative h-32 overflow-hidden rounded-lg mb-3">
+                          <div
+                            className="absolute inset-0 bg-cover bg-center rounded-lg"
+                            style={{
+                              backgroundImage: 'url("/other_house.jpg")'
+                            }}
+                          ></div>
+                          <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            Disponible
+                          </div>
+                        </div>
+                        <p className="text-sm font-semibold">Lote Pampa 101 - 500m² con vistas panorámicas</p>
+                        <div className="flex justify-between items-center mt-2">
+                          <div>
+                            <p className="text-lg font-bold">$25,000</p>
+                            <p className="text-xs text-gray-300">$50 por m²</p>
+                          </div>
+                          <button className="bg-white hover:bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center">
+                            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </FadeIn>
                   </div>
                 </div>
-                <p className="text-sm font-semibold">Lote Pampa 101 - 500m² con vistas panorámicas</p>
-                <div className="flex justify-between items-center mt-2">
-                  <div>
-                    <p className="text-lg font-bold">$25,000</p>
-                    <p className="text-xs text-gray-300">$50 por m²</p>
-                  </div>
-                  <button className="bg-white hover:bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center">
-                    <ArrowRightIcon className="w-5 h-5 text-black" />
-                  </button>
-                </div>
-              </div>
 
-              {/* Buscador inferior */}
-              <div className="relative mt-auto mb-8 lg:mb-16 w-full flex justify-center">
-                <div className="bg-white bg-opacity-20 backdrop-blur-md p-3 rounded-2xl shadow-2xl max-w-4xl w-full">
-                  <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-3 text-white">
-                    <div className="col-span-2 md:col-span-1 border-r border-white/30 pr-4">
-                      <label className="text-xs font-bold block">Ubicación</label>
-                      <input type="text" placeholder="Buscar ubicaciones" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
-                    </div>
-                    <div className="border-r border-white/30 pr-4">
-                      <label className="text-xs font-bold block">Tamaño</label>
-                      <input type="text" placeholder="m²" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
-                    </div>
-                    <div className="border-r border-white/30 pr-4">
-                      <label className="text-xs font-bold block">Presupuesto</label>
-                      <input type="text" placeholder="Max $" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
-                    </div>
-                    <div className="pr-4">
-                      <label className="text-xs font-bold block">Tipo</label>
-                      <input type="text" placeholder="Residencial" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
-                    </div>
-                    <div className="col-span-2 md:col-span-1 flex justify-center">
-                       <button className="bg-[#E9C874] text-black rounded-full h-14 w-14 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                       </button>
+                {/* Buscador inferior */}
+                <FadeIn direction="up" delay={400}>
+                  <div className="relative mt-auto mb-8 lg:mb-16 w-full flex justify-center z-20">
+                    <div className="bg-white bg-opacity-20 backdrop-blur-md p-3 rounded-2xl shadow-2xl max-w-4xl w-full hover:bg-opacity-25 transition-all duration-300">
+                      <div className="grid grid-cols-2 md:grid-cols-5 items-center gap-3 text-white">
+                      <div className="col-span-2 md:col-span-1 border-r border-white/30 pr-4">
+                        <label className="text-xs font-bold block">Ubicación</label>
+                        <input type="text" placeholder="Buscar ubicaciones" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                      </div>
+                      <div className="border-r border-white/30 pr-4">
+                        <label className="text-xs font-bold block">Tamaño</label>
+                        <input type="text" placeholder="m²" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                      </div>
+                      <div className="border-r border-white/30 pr-4">
+                        <label className="text-xs font-bold block">Presupuesto</label>
+                        <input type="text" placeholder="Max $" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                      </div>
+                      <div className="pr-4">
+                        <label className="text-xs font-bold block">Tipo</label>
+                        <input type="text" placeholder="Residencial" className="bg-transparent placeholder-white/70 focus:outline-none w-full"/>
+                      </div>
+                      <div className="col-span-2 md:col-span-1 flex justify-center">
+                         <button className="bg-[#E9C874] text-black rounded-full h-14 w-14 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                         </button>
+                      </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </FadeIn>
               </div>
             </div>
 
@@ -171,7 +186,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           {/* Nueva sección Nosotros con 3 contenedores horizontales */}
           <section id="nosotros-section" className="py-20 px-4" style={{ backgroundColor: '#3D5743' }}>
             <div className="container mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+              <StaggeredAnimation baseDelay={200} staggerDelay={150} direction="up">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
 
                 {/* Contenedor 1: Título, Contador y Texto */}
                 <div className="text-center lg:text-left" >
@@ -242,6 +258,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   </div>
                 </div>
               </div>
+                </StaggeredAnimation>
             </div>
           </section>
 
