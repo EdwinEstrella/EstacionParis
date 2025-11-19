@@ -9,42 +9,24 @@ import PoliticaPrivacidad from './components/PoliticaPrivacidad';
 import { Footer7 } from './components/ui/Footer';
 import ChatBot from './components/ChatBot';
 import { cacheManager } from './utils/cacheManager';
-import { useUserPreferences, useNavigationHistory } from './hooks/useCache';
+import { useNavigationHistory } from './hooks/useCache';
 import './App.css';
 
 interface NavigationParams {
   loteId?: string;
 }
 
-interface CookiePreferences {
-  essential: boolean;
-  analytics: boolean;
-  marketing: boolean;
-  functional: boolean;
-}
-
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [navigationParams, setNavigationParams] = useState<NavigationParams>({});
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [showCookieSettings, setShowCookieSettings] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookieConsent, setCookieConsent] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Cache hooks
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [theme, setTheme] = useUserPreferences('theme', { mode: 'light', animations: true });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [navigationHistory, addToNavigationHistory] = useNavigationHistory();
+  const [, addToNavigationHistory] = useNavigationHistory();
 
   useEffect(() => {
     // Initialize cache and preload critical data
     cacheManager.preloadCriticalData();
-
-    // Check if user has already made a choice about cookies
-    const savedConsent = localStorage.getItem('cookieConsent');
-    setCookieConsent(savedConsent);
 
     // Cache current page
     cacheManager.set('current_page', currentPage, 5 * 60 * 1000); // 5 minutes
@@ -66,29 +48,6 @@ function App() {
     if (params) {
       setNavigationParams(params);
     }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleCookieAccept = () => {
-    setCookieConsent('accepted');
-    console.log('Cookies aceptadas');
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleCookieReject = () => {
-    setCookieConsent('rejected');
-    console.log('Cookies rechazadas');
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleCookieCustomize = () => {
-    setShowCookieSettings(true);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleCookieSave = (settings: CookiePreferences) => {
-    setCookieConsent('customized');
-    console.log('Configuración de cookies guardada:', settings);
   };
 
   const renderPage = () => {
