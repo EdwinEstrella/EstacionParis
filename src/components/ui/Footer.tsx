@@ -47,23 +47,10 @@ export const Footer7 = ({ onNavigate }: Footer7Props) => {
               <svg
                 className="w-12 h-12 text-white"
                 viewBox="0 0 48 48"
-                fill="none"
+                fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M24 4L4 12V36L24 44L44 36V12L24 4Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M24 4V44M4 12L24 20L44 12M4 36L24 28L44 36"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" />
               </svg>
             </div>
 
