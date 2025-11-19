@@ -14,6 +14,23 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isSearchOpen = false, setIsSear
   const [contador1, setContador1] = useState(0);
   const [_contador2, setContador2] = useState(0);
   const [contador3, setContador3] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Array de imágenes del hero
+  const heroImages = [
+    '/hero.jpg',
+    '/Hero_another.jpg',
+    '/Another_hero.jpg'
+  ];
+
+  // Carrusel automático cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
 
   useEffect(() => {
     const duration = 2000;
@@ -63,16 +80,44 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isSearchOpen = false, setIsSear
       <div className="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
         <main className="flex h-full grow flex-col">
           {/* HeroSection - Full screen con nuevo diseño */}
-          <section className="relative h-[90vh] min-h-[700px] text-white flex flex-col justify-center">
+          <section className="relative h-[90vh] min-h-[700px] text-white flex flex-col justify-center overflow-hidden">
             <div className="absolute inset-0 bg-black">
-              <div
-                className="w-full h-full object-cover opacity-40"
-                style={{
-                  backgroundImage: 'url("/hero.jpg")',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
+              {/* Carrusel de imágenes */}
+              <div className="relative w-full h-full">
+                {heroImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 w-full h-full transition-transform duration-1000 ease-in-out ${
+                      index === currentImageIndex
+                        ? 'translate-x-0 opacity-40'
+                        : index === (currentImageIndex - 1 + heroImages.length) % heroImages.length
+                        ? '-translate-x-full opacity-0'
+                        : 'translate-x-full opacity-0'
+                    }`}
+                    style={{
+                      backgroundImage: `url("${image}")`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Indicadores del carrusel */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex
+                      ? 'bg-white w-8'
+                      : 'bg-white/50 hover:bg-white/70'
+                  }`}
+                  aria-label={`Ir a imagen ${index + 1}`}
+                />
+              ))}
             </div>
 
             <div className="relative z-10 w-full h-full">
@@ -324,7 +369,16 @@ const Home: React.FC<HomeProps> = ({ onNavigate, isSearchOpen = false, setIsSear
                     <div className="flex px-4 py-6 justify-center">
                       <button
                         onClick={() => onNavigate?.('lotes')}
-                        className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 border-2 border-primary text-primary bg-transparent text-base font-bold leading-normal tracking-[0.015em] transition-all hover:bg-primary hover:text-white hover:scale-105"
+                        className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 border-2 text-white bg-transparent text-base font-bold leading-normal tracking-[0.015em] transition-all hover:scale-105"
+                        style={{ borderColor: '#CF5029', color: '#CF5029' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#CF5029';
+                          e.currentTarget.style.color = 'white';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = '#CF5029';
+                        }}
                       >
                         <span className="truncate">Ver Todos los Lotes</span>
                       </button>

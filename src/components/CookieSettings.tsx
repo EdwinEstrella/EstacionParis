@@ -202,7 +202,8 @@ const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose, onSave
                   </button>
                   <button
                     onClick={handleAcceptAll}
-                    className="px-4 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary/10 transition-colors"
+                    className="px-4 py-2 text-sm font-medium rounded-lg border transition-colors hover:opacity-90"
+                    style={{ color: '#CF5029', borderColor: '#CF5029' }}
                   >
                     Aceptar todas
                   </button>
@@ -216,7 +217,8 @@ const CookieSettings: React.FC<CookieSettingsProps> = ({ isOpen, onClose, onSave
                   </button>
                   <button
                     onClick={handleSave}
-                    className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+                    className="px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors hover:opacity-90"
+                      style={{ backgroundColor: '#CF5029' }}
                   >
                     Guardar preferencias
                   </button>

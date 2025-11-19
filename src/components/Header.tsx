@@ -139,7 +139,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpe
             <div className="hidden md:flex flex-1 justify-end">
               <button
                 onClick={() => handleNavigation('contacto')}
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-700 transition-colors"
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors"
+                style={{ backgroundColor: '#CF5029' }}
               >
                 <span className="truncate">Contacto</span>
               </button>
@@ -217,7 +218,8 @@ const Header: React.FC<HeaderProps> = ({ currentPage = 'home', onNavigate, onOpe
               )}
               <button
                 onClick={() => handleNavigation('contacto')}
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-red-700 transition-colors"
+                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors"
+                style={{ backgroundColor: '#CF5029' }}
               >
                 <span className="truncate">Contacto</span>
               </button>

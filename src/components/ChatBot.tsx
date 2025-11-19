@@ -80,7 +80,7 @@ const ChatBot: React.FC = () => {
       <button
         onClick={handleToggle}
         className="fixed bottom-6 right-6 flex size-14 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary text-white shadow-lg transition-all duration-300 hover:scale-110 z-40"
-        style={{ backgroundColor: '#CF2E2E' }}
+        style={{ backgroundColor: '#CF5029' }}
       >
         {isOpen ? (
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ const ChatBot: React.FC = () => {
           isAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
         }`}>
           {/* Header del chat */}
-          <div className="flex items-center justify-between p-4 bg-primary text-white" style={{ backgroundColor: '#CF2E2E' }}>
+          <div className="flex items-center justify-between p-4 bg-primary text-white" style={{ backgroundColor: '#CF5029' }}>
             <div className="flex items-center gap-3">
               <div className="size-10 rounded-full bg-white/20 flex items-center justify-center">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,7 +142,7 @@ const ChatBot: React.FC = () => {
                       ? 'bg-primary text-white'
                       : 'bg-white border border-gray-200 text-gray-800'
                   }`}
-                  style={{ backgroundColor: message.isUser ? '#CF2E2E' : undefined }}
+                  style={{ backgroundColor: message.isUser ? '#CF5029' : undefined }}
                 >
                   {message.text}
                 </div>
@@ -172,14 +172,14 @@ const ChatBot: React.FC = () => {
                 onKeyDown={handleKeyPress}
                 placeholder="Escribe tu mensaje..."
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-primary transition-colors"
-                style={{ '--focus-border-color': '#CF2E2E' } as React.CSSProperties}
+                style={{ '--focus-border-color': '#CF5029' } as React.CSSProperties}
                 disabled={isTyping}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={isTyping || inputValue.trim() === ''}
                 className="p-2 rounded-full bg-primary text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                style={{ backgroundColor: '#CF2E2E' }}
+                style={{ backgroundColor: '#CF5029' }}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
